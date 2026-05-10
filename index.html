@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nosso Casamento</title>
+    <meta
+      name="description"
+      content="Site oficial do nosso casamento com programação, confirmação de presença, hospedagem, dress code e lista de presentes."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="Abrir menu"
+        aria-controls="site-menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <p class="topbar-date">31.10.26</p>
+      <span class="topbar-spacer" aria-hidden="true"></span>
+    </header>
+
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <aside class="side-menu" id="site-menu" aria-hidden="true">
+      <div class="side-menu-head">
+        <p>Menu</p>
+        <button id="menu-close" type="button" class="menu-close" aria-label="Fechar menu">
+          Fechar
+        </button>
+      </div>
+      <nav class="side-nav">
+        <a href="#nossa-historia">Nossa história</a>
+        <a href="#endereco">Endereço</a>
+        <a href="#cronograma-casamento">Cronograma do casamento</a>
+        <a href="#confirmar-presenca">Confirmar presença</a>
+        <a href="#dress-code">Dress Code</a>
+        <a href="#lista-presentes">Lista de presentes</a>
+        <a href="#hospedagem-salao">Hospedagem e salão</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section id="inicio" class="hero">
+        <img
+          src="assets/images/monograma-preto.png"
+          alt="Monograma do casal"
+          class="hero-monogram"
+          id="hero-monogram"
+        />
+        <div class="hero-copy">
+          <h1 class="hero-date-title">31 de outubro de 2026</h1>
+          <p class="hero-time">14h15 · início da cerimônia</p>
+          <p class="hero-subtitle">Mirante Gold Party, Biguaçu-SC</p>
+        </div>
+        <p class="hero-countdown">Faltam <span id="countdown">carregando...</span></p>
+      </section>
+
+      <section id="nossa-historia" class="section story">
+        <div class="story-text reveal">
+          <p class="eyebrow">Nossa história</p>
+          <h2>Um amor construído em detalhes.</h2>
+          <p>
+            Simone e Richard se conheceram ainda adolescentes, quando ela tinha
+            16 anos e ele 15. Antes mesmo do namoro começar, Simone já dizia que
+            queria “entrar para a família” dele, já que era melhor amiga da
+            prima do Richard.
+          </p>
+          <p>
+            Até que um dia, depois de ouvir do pai dele algumas vezes a frase
+            “meu filho está orando por você”, Simone respondeu: “Mas ele tem que
+            vir atrás.” E ele foi.
+          </p>
+          <p>
+            O primeiro encontro teve rosa vermelha, casa de chá e macarons
+            franceses. Depois vieram os passeios, as conversas, a parceria e, em
+            frente à escola de inglês da Simone, o primeiro beijo em 2014,
+            marcando o início do namoro.
+          </p>
+          <p>
+            Desde então, foram muitos sonhos, mudanças, recomeços e crescimento
+            juntos. De Florianópolis para São Paulo, de trabalhos improvisados
+            durante a pandemia aos projetos construídos lado a lado, sempre
+            existiu uma certeza: independentemente da fase da vida, eles
+            escolheriam caminhar juntos.
+          </p>
+          <p>
+            Anos depois, durante o Ironman 70.3 Florianópolis 2023 (prova que
+            representava um grande sonho do Richard) Simone acreditava que estava
+            ali apenas para registrar a chegada dele.
+          </p>
+          <p>
+            Mas, logo após cruzar a linha de chegada, Richard tirou um anel do
+            bolso e fez o pedido de casamento.
+          </p>
+          <p>
+            Ali, um sonho terminava. E outro começava.
+          </p>
+          <p>
+            Agora, depois de 12 anos escolhendo um ao outro todos os dias, Simone
+            e Richard querem celebrar o início de uma nova família ao lado das
+            pessoas mais importantes da vida deles.
+          </p>
+          <p>
+            E para tornar esse dia ainda mais especial, queremos viver cada
+            instante dele com vocês.
+          </p>
+        </div>
+        <div class="memories" aria-label="Galeria de lembranças">
+          <article class="memory-card reveal">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 01</p>
+          </article>
+          <article class="memory-card reveal delay-1">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 02</p>
+          </article>
+          <article class="memory-card reveal delay-2">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 03</p>
+          </article>
+          <article class="memory-card reveal delay-3">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 04</p>
+          </article>
+          <article class="memory-card reveal delay-1">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 05</p>
+          </article>
+          <article class="memory-card reveal delay-2">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 06</p>
+          </article>
+          <article class="memory-card reveal delay-3">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 07</p>
+          </article>
+          <article class="memory-card reveal delay-2">
+            <img data-memory-photo class="memory-image" alt="Lembrança do casal" loading="lazy" decoding="async" width="800" height="1000" />
+            <p>Nossa lembrança 08</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="endereco" class="section">
+        <p class="eyebrow">Endereço</p>
+        <h2>Mirante Gold Party (Biguaçu-SC)</h2>
+        <p class="intro">
+          A cerimônia e a recepção serão no mesmo local. Temos estacionamento no
+          espaço para facilitar sua chegada.
+        </p>
+        <ul class="details-list">
+          <li>Data: 31.10.26</li>
+          <li>Local: Mirante Gold Party, Biguaçu-SC</li>
+          <li>Cerimônia e recepção no mesmo endereço</li>
+          <li>Estacionamento disponível</li>
+        </ul>
+        <a
+          class="btn btn-outline"
+          href="https://www.google.com/maps/search/?api=1&query=Mirante+Gold+Party+Bigua%C3%A7u+SC"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir rota no Google Maps
+        </a>
+      </section>
+
+      <section id="cronograma-casamento" class="section">
+        <p class="eyebrow">Cronograma do casamento</p>
+        <h2>Programação do dia</h2>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <span class="timeline-time">14h15</span>
+            <div>
+              <h3>Início da cerimônia</h3>
+              <p>Pedimos pontualidade para todos aproveitarem esse momento.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-time">15h30</span>
+            <div>
+              <h3>Café da tarde e fotos</h3>
+              <p>Momento leve para fotos, abraços e boas conversas.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-time">18h00</span>
+            <div>
+              <h3>Jantar</h3>
+              <p>Encerramos a noite com um jantar especial para celebrar juntos.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="confirmar-presenca" class="section rsvp">
+        <p class="eyebrow">Confirmar presença</p>
+        <h2>RSVP</h2>
+        <p class="intro">Confirme sua presença preenchendo o formulário abaixo.</p>
+        <form id="rsvp-form" class="rsvp-form">
+          <label for="guest-name">Nome completo *</label>
+          <input id="guest-name" name="guestName" type="text" required />
+
+          <label for="guest-presence">Presença *</label>
+          <select id="guest-presence" name="presence" required>
+            <option value="">Selecione</option>
+            <option value="sim">Sim, vou comemorar com vocês!</option>
+            <option value="nao">Não poderei comparecer</option>
+          </select>
+
+          <label for="guest-message">Recado para os noivos (opcional)</label>
+          <textarea
+            id="guest-message"
+            name="message"
+            rows="3"
+            placeholder="Escreva um recadinho..."
+          ></textarea>
+
+          <button type="submit" class="btn btn-primary">Enviar confirmação</button>
+          <p class="rsvp-note">
+            Sua confirmação é enviada automaticamente por e-mail para os noivos.
+          </p>
+          <p id="rsvp-feedback" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="dress-code" class="section">
+        <p class="eyebrow">Dress Code</p>
+        <h2>Conforto, estilo e personalidade.</h2>
+        <p class="intro">
+          Os tons de rosa e azul são reservados para padrinhos e madrinhas.
+          Demais convidados, por favor, evitem esses tons.
+        </p>
+        <p class="intro">
+          Nosso casamento é diferente do comum, então está liberado usar roupas
+          confortáveis.
+        </p>
+        <div class="color-rules">
+          <article class="color-chip avoid-rose reveal">
+            <span>Evitar</span>
+            <strong>Tons de rosa</strong>
+          </article>
+          <article class="color-chip avoid-blue reveal delay-1">
+            <span>Evitar</span>
+            <strong>Tons de azul</strong>
+          </article>
+        </div>
+      </section>
+
+      <section id="lista-presentes" class="section gifts">
+        <p class="eyebrow">Lista de presentes</p>
+        <h2>Com carinho, em forma de presente</h2>
+        <p class="intro">
+          Em vez de presentes físicos, vocês podem nos presentear via Pix. A
+          lista abaixo representa sonhos que queremos construir juntos.
+        </p>
+        <div class="gift-layout">
+          <div class="gift-list reveal">
+            <h3>Nosso mural de desejos</h3>
+            <ul>
+              <li>Lua de mel</li>
+              <li>Jantar especial do casal</li>
+              <li>Itens para o novo lar</li>
+              <li>Experiências para nossa nova fase</li>
+            </ul>
+          </div>
+          <div class="pix-card reveal delay-1">
+            <h3>Pix do casal</h3>
+            <p>Escaneie o QR Code para enviar o valor que desejar.</p>
+            <div class="qr-placeholder" aria-label="Área do QR Code Pix">
+              <span>Insira aqui o QR Code Pix</span>
+            </div>
+            <p class="pix-key">Chave Pix: adicionar_chave@exemplo.com</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="hospedagem-salao" class="section suggestions">
+        <p class="eyebrow">Hospedagem e salão</p>
+        <h2>Sugestões próximas ao local</h2>
+        <div class="suggestion-grid">
+          <article class="suggestion-card reveal">
+            <h3>Hotéis e pousadas</h3>
+            <p>Espaço para incluir opções próximas ao Mirante Gold Party.</p>
+            <ul>
+              <li>Adicionar nome do hotel</li>
+              <li>Endereço e distância aproximada</li>
+              <li>Contato para reserva</li>
+            </ul>
+          </article>
+          <article class="suggestion-card reveal delay-1">
+            <h3>Salão / maquiagem / penteado</h3>
+            <p>Espaço para indicar profissionais e salões recomendados.</p>
+            <ul>
+              <li>Nome do salão</li>
+              <li>Serviços disponíveis</li>
+              <li>Telefone ou Instagram</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Com amor, esperando vocês para esse dia inesquecível.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
