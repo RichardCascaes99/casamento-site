@@ -9,6 +9,12 @@ const MEMORY_FADE_OUT_MS = 560;
 const MEMORY_DRIFT_MS = 1650;
 const MEMORY_DRIFT_MAX_PX = 9;
 const MEMORY_DRIFT_MAX_ROTATE_DEG = 1.05;
+const HERO_COLLAGE_DENSITY = 32000;
+const HERO_COLLAGE_MIN_MOBILE = 28;
+const HERO_COLLAGE_MIN_DESKTOP = MEMORY_TOTAL;
+const HERO_COLLAGE_MAX = 72;
+const HERO_COLLAGE_MAX_HEAVY_OVERLAPS = 2;
+const HERO_COLLAGE_HEAVY_OVERLAP_RATIO = 0.8;
 
 const MEMORY_DATE_LABELS = {
   "001": "26/04/2015",
@@ -61,6 +67,7 @@ const MEMORY_DATE_LABELS = {
 };
 
 const heroMonogram = document.getElementById("hero-monogram");
+const heroCollage = document.getElementById("hero-collage");
 const countdownEl = document.getElementById("countdown");
 
 const memoriesContainer = document.querySelector(".memories");
@@ -100,6 +107,7 @@ let memoryDriftTimer = null;
 let memoryCycleLocked = false;
 let memorySectionVisible = true;
 let memoryCardSlotIndices = [];
+let heroCollageRenderToken = 0;
 
 function wait(ms) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -128,6 +136,186 @@ function shuffle(array) {
 
 function isDesktopMemories() {
   return !window.matchMedia("(max-width: 920px)").matches;
+}
+
+function getHeroCollagePhotoCount(width, height) {
+  const isMobile = width < 760;
+  const minCount = isMobile ? HERO_COLLAGE_MIN_MOBILE : HERO_COLLAGE_MIN_DESKTOP;
+  const densityCount = Math.round((width * height) / HERO_COLLAGE_DENSITY);
+  return clamp(densityCount, minCount, HERO_COLLAGE_MAX);
+}
+
+function overlapArea(rectA, rectB) {
+  const x = Math.max(
+    0,
+    Math.min(rectA.x + rectA.width, rectB.x + rectB.width) - Math.max(rectA.x, rectB.x)
+  );
+  const y = Math.max(
+    0,
+    Math.min(rectA.y + rectA.height, rectB.y + rectB.height) -
+      Math.max(rectA.y, rectB.y)
+  );
+  return x * y;
+}
+
+function buildHeroCollageSequence(count) {
+  const selected = [];
+  let batch = shuffle(buildMemoryPool());
+  let cursor = 0;
+
+  while (selected.length < count) {
+    if (cursor >= batch.length) {
+      batch = shuffle(buildMemoryPool());
+      cursor = 0;
+    }
+    selected.push(batch[cursor]);
+    cursor += 1;
+  }
+  return selected;
+}
+
+function getSafePhotoRatio(photo) {
+  const safeWidth = Number(photo?.width) || 0;
+  const safeHeight = Number(photo?.height) || 0;
+  if (safeWidth <= 0 || safeHeight <= 0) return 1;
+  return clamp(safeWidth / safeHeight, 0.58, 1.85);
+}
+
+function buildHeroTileLayout(photos, width, height) {
+  const count = photos.length;
+  const isMobile = width < 760;
+  const minWidth = isMobile ? 86 : 124;
+  const maxWidth = isMobile ? 156 : 240;
+  const maxRotation = isMobile ? 18 : 26;
+  const placed = [];
+
+  for (let i = 0; i < count; i += 1) {
+    let bestCandidate = null;
+    let bestPenalty = Number.POSITIVE_INFINITY;
+
+    for (let attempt = 0; attempt < 60; attempt += 1) {
+      const tileWidth = randomBetween(minWidth, maxWidth);
+      const aspectRatio = getSafePhotoRatio(photos[i]);
+      const tileHeight = tileWidth / aspectRatio;
+      const x = randomBetween(-tileWidth * 0.28, width - tileWidth * 0.72);
+      const y = randomBetween(-tileHeight * 0.2, height - tileHeight * 0.82);
+      const rotate = randomBetween(-maxRotation, maxRotation);
+
+      const candidate = { x, y, width: tileWidth, height: tileHeight, rotate };
+
+      let heavyOverlaps = 0;
+      let penalty = 0;
+      for (let j = 0; j < placed.length; j += 1) {
+        const overlap = overlapArea(candidate, placed[j]);
+        if (!overlap) continue;
+        const minArea = Math.min(
+          candidate.width * candidate.height,
+          placed[j].width * placed[j].height
+        );
+        const ratio = overlap / minArea;
+        penalty += ratio;
+        if (ratio > HERO_COLLAGE_HEAVY_OVERLAP_RATIO) {
+          heavyOverlaps += 1;
+          if (heavyOverlaps > HERO_COLLAGE_MAX_HEAVY_OVERLAPS) {
+            penalty = Number.POSITIVE_INFINITY;
+            break;
+          }
+        }
+      }
+
+      if (penalty < bestPenalty) {
+        bestPenalty = penalty;
+        bestCandidate = candidate;
+        if (bestPenalty < 0.5) break;
+      }
+    }
+
+    const fallbackRatio = getSafePhotoRatio(photos[i]);
+    placed.push(
+      bestCandidate || {
+        x: randomBetween(0, Math.max(0, width - minWidth)),
+        y: randomBetween(0, Math.max(0, height - minWidth)),
+        width: minWidth,
+        height: minWidth / fallbackRatio,
+        rotate: randomBetween(-12, 12),
+      }
+    );
+  }
+
+  return placed;
+}
+
+async function renderHeroCollage() {
+  if (!heroCollage) return;
+
+  const renderToken = ++heroCollageRenderToken;
+  const width = heroCollage.clientWidth || window.innerWidth;
+  const height = heroCollage.clientHeight || window.innerHeight;
+  const tileCount = getHeroCollagePhotoCount(width, height);
+  const photos = buildHeroCollageSequence(tileCount);
+  const resolvedPhotos = await Promise.all(
+    photos.map(async (photo) => {
+      const resolved = await resolveMemorySource(photo);
+      if (resolved.ok) return resolved;
+      return {
+        ...photo,
+        ok: false,
+        width: 1200,
+        height: 900,
+        resolvedSrc: photo.src,
+      };
+    })
+  );
+
+  if (renderToken !== heroCollageRenderToken) return;
+
+  const layout = buildHeroTileLayout(resolvedPhotos, width, height);
+  const fragment = document.createDocumentFragment();
+
+  resolvedPhotos.forEach((photo, index) => {
+    const tile = layout[index];
+    const card = document.createElement("figure");
+    card.className = "hero-photo";
+    const shortEdge = Math.min(tile.width, tile.height);
+    const framePad = clamp(shortEdge * 0.04, 4, 11);
+    const frameRadius = clamp(shortEdge * 0.058, 7, 16);
+    const imageRadius = clamp(frameRadius - framePad * 0.42, 4, 11);
+    const frameBorder = clamp(shortEdge * 0.0075, 1, 2.6);
+    card.style.width = `${Math.round(tile.width)}px`;
+    card.style.height = `${Math.round(tile.height)}px`;
+    card.style.setProperty("--photo-x", `${Math.round(tile.x)}px`);
+    card.style.setProperty("--photo-y", `${Math.round(tile.y)}px`);
+    card.style.setProperty("--photo-r", `${tile.rotate.toFixed(2)}deg`);
+    card.style.setProperty("--hero-frame-pad", `${framePad.toFixed(1)}px`);
+    card.style.setProperty("--hero-frame-radius", `${frameRadius.toFixed(1)}px`);
+    card.style.setProperty("--hero-image-radius", `${imageRadius.toFixed(1)}px`);
+    card.style.setProperty("--hero-frame-border", `${frameBorder.toFixed(2)}px`);
+    card.style.zIndex = String(index + 1);
+
+    const img = document.createElement("img");
+    img.src = photo.resolvedSrc || photo.src;
+    img.alt = "";
+    img.decoding = "async";
+    img.loading = index < 22 ? "eager" : "lazy";
+    card.appendChild(img);
+    fragment.appendChild(card);
+  });
+
+  heroCollage.replaceChildren(fragment);
+}
+
+function initHeroCollage() {
+  if (!heroCollage) return;
+
+  void renderHeroCollage();
+
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      void renderHeroCollage();
+    }, 220);
+  });
 }
 
 function animateHeroMonogram() {
@@ -654,9 +842,9 @@ window.addEventListener("beforeunload", () => {
   clearMemoryCycle();
 });
 
+initHeroCollage();
 initHeroScroll();
 initReveals();
-void initRandomMemories();
 initMenu();
 initRsvpForm();
 updateCountdown();
