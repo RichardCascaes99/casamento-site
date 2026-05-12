@@ -295,9 +295,6 @@ body.menu-open .menu-overlay {
   transition: transform 0.2s linear, opacity 0.2s linear;
   opacity: 0.96;
   z-index: 3;
-  filter:
-    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
-    drop-shadow(0 0 10px rgba(255, 255, 255, 0.55));
 }
 
 .hero-copy {
@@ -312,8 +309,6 @@ body.menu-open .menu-overlay {
   font-size: clamp(2rem, 5.8vw, 4.1rem);
   letter-spacing: 0.02em;
   font-weight: 500;
-  -webkit-text-stroke: 0.55px rgba(255, 255, 255, 0.9);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
 }
 
 .hero-time {
@@ -322,8 +317,6 @@ body.menu-open .menu-overlay {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #525252;
-  -webkit-text-stroke: 0.38px rgba(255, 255, 255, 0.9);
-  text-shadow: 0 0 7px rgba(255, 255, 255, 0.45);
 }
 
 .hero-eyebrow {
@@ -339,8 +332,6 @@ body.menu-open .menu-overlay {
   font-size: clamp(0.9rem, 2vw, 1.05rem);
   letter-spacing: 0.05em;
   color: var(--text-soft);
-  -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.88);
-  text-shadow: 0 0 7px rgba(255, 255, 255, 0.4);
 }
 
 .hero-countdown {
@@ -351,15 +342,11 @@ body.menu-open .menu-overlay {
   color: #5d5d5d;
   letter-spacing: 0.05em;
   z-index: 4;
-  -webkit-text-stroke: 0.32px rgba(255, 255, 255, 0.88);
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.38);
 }
 
 .hero-countdown span {
   color: #161616;
   font-weight: 600;
-  -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.9);
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 }
 
 .section {
