@@ -211,7 +211,8 @@ body.menu-open .menu-overlay {
 }
 
 .side-nav a:hover,
-.side-nav a:focus-visible {
+.side-nav a:focus-visible,
+.side-nav a[aria-current="page"] {
   border-color: #d8d8d8;
   background: #fafafa;
 }
@@ -354,6 +355,27 @@ body.menu-open .menu-overlay {
   margin: 0 auto;
   padding: var(--section-spacing) 0;
   border-top: 1px solid #f0f0f0;
+  scroll-margin-top: 5rem;
+}
+
+.tab-section[hidden] {
+  display: none;
+}
+
+.tab-section.is-active {
+  animation: tabSectionEnter 0.42s ease both;
+}
+
+@keyframes tabSectionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .eyebrow {

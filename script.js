@@ -79,6 +79,8 @@ const menuClose = document.getElementById("menu-close");
 const menuOverlay = document.getElementById("menu-overlay");
 const sideMenu = document.getElementById("site-menu");
 const sideMenuLinks = document.querySelectorAll(".side-nav a");
+const tabSections = Array.from(document.querySelectorAll(".tab-section"));
+const tabSectionLinks = Array.from(document.querySelectorAll("[data-tab-link]"));
 
 const rsvpForm = document.getElementById("rsvp-form");
 const rsvpFeedback = document.getElementById("rsvp-feedback");
@@ -736,6 +738,82 @@ function initMenu() {
   });
 }
 
+function hideTabSections() {
+  tabSections.forEach((section) => {
+    section.hidden = true;
+    section.classList.remove("is-active");
+  });
+  tabSectionLinks.forEach((link) => link.removeAttribute("aria-current"));
+}
+
+function showTabSection(sectionId, shouldScroll = true) {
+  const target = document.getElementById(sectionId);
+  if (!target || !target.classList.contains("tab-section")) return false;
+
+  tabSections.forEach((section) => {
+    const isTarget = section === target;
+    section.hidden = !isTarget;
+    section.classList.toggle("is-active", isTarget);
+  });
+
+  tabSectionLinks.forEach((link) => {
+    const isCurrent = link.getAttribute("href") === `#${sectionId}`;
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
+  if (shouldScroll) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  return true;
+}
+
+function initSectionTabs() {
+  if (!tabSections.length) return;
+
+  sideMenuLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+
+      const sectionId = href.slice(1);
+      const openedTab = showTabSection(sectionId, true);
+      if (openedTab) {
+        event.preventDefault();
+        window.history.pushState(null, "", href);
+        return;
+      }
+
+      hideTabSections();
+    });
+  });
+
+  const initialSectionId = window.location.hash.slice(1);
+  if (initialSectionId) {
+    const openedInitialTab = showTabSection(initialSectionId, false);
+    if (openedInitialTab) {
+      window.requestAnimationFrame(() => {
+        document
+          .getElementById(initialSectionId)
+          ?.scrollIntoView({ behavior: "auto", block: "start" });
+      });
+    }
+  } else {
+    hideTabSections();
+  }
+
+  window.addEventListener("hashchange", () => {
+    const sectionId = window.location.hash.slice(1);
+    if (!showTabSection(sectionId, true)) {
+      hideTabSections();
+    }
+  });
+}
+
 function updateCountdown() {
   if (!countdownEl) return;
   const weddingDate = new Date("2026-10-31T14:15:00-03:00");
@@ -846,6 +924,7 @@ initHeroCollage();
 initHeroScroll();
 initReveals();
 initMenu();
+initSectionTabs();
 initRsvpForm();
 updateCountdown();
 window.setInterval(updateCountdown, 60 * 1000);
