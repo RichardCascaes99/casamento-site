@@ -410,7 +410,7 @@ body.menu-open .menu-overlay {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(230px, 320px);
   gap: clamp(1.6rem, 4vw, 3.4rem);
-  align-items: start;
+  align-items: center;
 }
 
 .story-text {
@@ -427,6 +427,15 @@ body.menu-open .menu-overlay {
   justify-self: center;
   position: sticky;
   top: 5.4rem;
+  text-align: center;
+}
+
+.proposal-video figcaption {
+  margin: 0 0 0.8rem;
+  font-family: "Allura", "Brush Script MT", cursive;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  color: #171717;
 }
 
 .proposal-video video {
@@ -605,6 +614,17 @@ body.menu-open .menu-overlay {
   padding: clamp(1.3rem, 4vw, 2rem);
 }
 
+.rsvp-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(245px, 330px);
+  gap: clamp(1.1rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.rsvp-content {
+  min-width: 0;
+}
+
 .rsvp-form {
   max-width: 650px;
   margin-top: 1rem;
@@ -625,6 +645,26 @@ body.menu-open .menu-overlay {
   border: 1px solid #ddd;
   border-radius: 0.64rem;
   background: #fff;
+}
+
+.rsvp-form select:disabled,
+.rsvp-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.field-hint {
+  margin: -0.38rem 0 0.15rem;
+  color: #686868;
+  font-size: 0.82rem;
+}
+
+.field-hint.success {
+  color: #2f7d4a;
+}
+
+.field-hint.error {
+  color: #b13e47;
 }
 
 .feedback {
@@ -648,13 +688,14 @@ body.menu-open .menu-overlay {
 }
 
 .rsvp-deadline {
-  max-width: 650px;
-  margin: 1.2rem 0;
+  margin: 0;
   padding: 1rem 1.1rem;
   border: 1px solid rgba(181, 138, 69, 0.28);
   border-radius: 0.9rem;
   background: rgba(255, 255, 255, 0.72);
   box-shadow: 0 16px 34px rgba(23, 23, 23, 0.06);
+  position: sticky;
+  top: 5.4rem;
 }
 
 .rsvp-deadline span {
@@ -719,15 +760,14 @@ body.menu-open .menu-overlay {
   background: linear-gradient(140deg, #e1e8f9, var(--navy-soft));
 }
 
-.gifts .gift-layout {
+.gift-shop {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  margin-top: 1.2rem;
+  margin-top: 1.7rem;
 }
 
-.gift-list,
-.pix-card,
+.gift-product-card,
 .suggestion-card {
   border: 1px solid #ebebeb;
   background: #fff;
@@ -736,13 +776,168 @@ body.menu-open .menu-overlay {
   box-shadow: var(--shadow-soft);
 }
 
+.gift-product-card {
+  min-height: 100%;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.gift-product-media {
+  min-height: 170px;
+  border-radius: 0.9rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.8), transparent 28%),
+    linear-gradient(135deg, rgba(229, 193, 200, 0.65), rgba(216, 224, 245, 0.7) 54%, rgba(181, 138, 69, 0.28));
+}
+
+.gift-product-media::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  border-radius: 0.72rem;
+  z-index: -1;
+}
+
+.gift-product-media span {
+  width: min(72%, 132px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.54);
+  color: rgba(23, 23, 23, 0.78);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.gift-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.8rem;
+}
+
+.gift-product-card h3 {
+  margin-bottom: 0;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+}
+
+.gift-price {
+  margin: -0.35rem 0 0;
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.gift-product-card .btn {
+  width: 100%;
+  align-self: end;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background: rgba(23, 23, 23, 0.42);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gift-modal {
+  width: min(560px, 100%);
+  max-height: min(86vh, 760px);
+  overflow: auto;
+  position: relative;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(145deg, #fff, #fff8f9 52%, #f7f9ff);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  padding: clamp(1.2rem, 4vw, 2rem);
+  box-shadow: 0 26px 80px rgba(23, 23, 23, 0.22);
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  background: #fff;
+  color: #171717;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gift-modal-copy {
+  color: var(--text-soft);
+}
+
+.gift-buyer-label {
+  display: block;
+  margin: 0.8rem 0 0.38rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.gift-buyer-input {
+  width: 100%;
+  font: inherit;
+  padding: 0.78rem 0.88rem;
+  border: 1px solid #ddd;
+  border-radius: 0.64rem;
+  background: #fff;
+}
+
+.gift-payment {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.gift-card-payment {
+  width: 100%;
+}
+
+.gift-card-payment.is-disabled {
+  pointer-events: none;
+  opacity: 0.48;
+}
+
+.gift-pix-area {
+  margin-top: 1rem;
+}
+
+.pix-copy-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem;
+}
+
 .gift-list ul,
 .suggestion-card ul {
   margin: 0.75rem 0 0;
   padding-left: 1rem;
 }
 
-.gift-list li,
 .suggestion-card li {
   margin-bottom: 0.3rem;
   color: var(--text-soft);
@@ -847,7 +1042,8 @@ body.menu-open .menu-overlay {
 }
 
 @media (max-width: 1100px) {
-  .home-links-grid {
+  .home-links-grid,
+  .gift-shop {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -862,15 +1058,21 @@ body.menu-open .menu-overlay {
   }
 
   .story-layout,
-  .gifts .gift-layout,
+  .rsvp-layout,
   .suggestion-grid,
   .home-links-grid {
     grid-template-columns: 1fr;
   }
 
-  .proposal-video {
+  .proposal-video,
+  .rsvp-deadline {
     width: min(100%, 300px);
     position: static;
+  }
+
+  .rsvp-deadline {
+    width: 100%;
+    max-width: 650px;
   }
 
   .memories {
@@ -924,6 +1126,14 @@ body.menu-open .menu-overlay {
 
   .home-link-card {
     min-height: 112px;
+  }
+
+  .gift-shop {
+    grid-template-columns: 1fr;
+  }
+
+  .pix-copy-row {
+    grid-template-columns: 1fr;
   }
 
   .timeline-item {

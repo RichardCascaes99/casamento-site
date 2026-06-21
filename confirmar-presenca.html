@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260621-2" />
+    <link rel="stylesheet" href="styles.css?v=20260621-4" />
   </head>
   <body>
     <header class="topbar"><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="site-menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="topbar-date" href="index.html">31.10.26</a><span class="topbar-spacer" aria-hidden="true"></span></header>
@@ -18,33 +18,42 @@
       <section class="section rsvp detail-section">
         <p class="eyebrow">Confirmar presença</p>
         <h1>RSVP</h1>
-        <p class="intro">
-          Para organizarmos cada detalhe com carinho, precisamos receber a
-          confirmação de presença de todos os convidados até 30 dias antes do
-          casamento.
-        </p>
-        <div class="rsvp-deadline" aria-label="Prazo para confirmação de presença">
-          <span>Prazo para confirmar</span>
-          <strong>1 de outubro de 2026</strong>
-          <p>Faltam <b id="rsvp-deadline-countdown">carregando...</b></p>
+        <div class="rsvp-layout">
+          <div class="rsvp-content">
+            <p class="intro">
+              Para organizarmos cada detalhe com carinho, precisamos receber a
+              confirmação de presença de todos os convidados até o dia
+              <strong>25 de setembro de 2026</strong>.
+            </p>
+            <p class="intro">
+              Depois desse prazo, finalizaremos a organização com o espaço e os
+              fornecedores. Digite seu nome como está na lista de convidados para
+              liberar a confirmação.
+            </p>
+            <form id="rsvp-form" class="rsvp-form">
+              <label for="guest-name">Nome completo *</label>
+              <input id="guest-name" name="guestName" type="text" autocomplete="name" required />
+              <p id="guest-match-feedback" class="field-hint" role="status" aria-live="polite">Digite seu nome para buscarmos na lista de convidados.</p>
+              <input id="matched-guest-name" name="matchedGuestName" type="hidden" />
+              <label for="guest-whatsapp">WhatsApp *</label>
+              <input id="guest-whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="(48) 99999-9999" required />
+              <label for="guest-presence">Presença *</label>
+              <select id="guest-presence" name="presence" required disabled><option value="">Selecione</option><option value="sim">Sim, vou comemorar com vocês!</option><option value="nao">Não poderei comparecer</option></select>
+              <label for="guest-message">Recado para os noivos (opcional)</label>
+              <textarea id="guest-message" name="message" rows="3" placeholder="Escreva um recadinho..."></textarea>
+              <button type="submit" class="btn btn-primary" id="rsvp-submit" disabled>Enviar confirmação</button>
+              <p class="rsvp-note">Sua confirmação é enviada automaticamente por e-mail para os noivos.</p>
+              <p id="rsvp-feedback" class="feedback" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <div class="rsvp-deadline" aria-label="Prazo para confirmação de presença">
+            <span>Prazo para confirmar</span>
+            <strong>25 de setembro de 2026</strong>
+            <p>Faltam <b id="rsvp-deadline-countdown">carregando...</b></p>
+          </div>
         </div>
-        <p class="intro">
-          Depois desse prazo, finalizaremos a organização com o espaço e os
-          fornecedores. Confirme abaixo se você poderá celebrar esse dia conosco.
-        </p>
-        <form id="rsvp-form" class="rsvp-form">
-          <label for="guest-name">Nome completo *</label>
-          <input id="guest-name" name="guestName" type="text" required />
-          <label for="guest-presence">Presença *</label>
-          <select id="guest-presence" name="presence" required><option value="">Selecione</option><option value="sim">Sim, vou comemorar com vocês!</option><option value="nao">Não poderei comparecer</option></select>
-          <label for="guest-message">Recado para os noivos (opcional)</label>
-          <textarea id="guest-message" name="message" rows="3" placeholder="Escreva um recadinho..."></textarea>
-          <button type="submit" class="btn btn-primary">Enviar confirmação</button>
-          <p class="rsvp-note">Sua confirmação é enviada automaticamente por e-mail para os noivos.</p>
-          <p id="rsvp-feedback" class="feedback" role="status" aria-live="polite"></p>
-        </form>
       </section>
     </main>
-    <script src="script.js?v=20260621-3"></script>
+    <script src="script.js?v=20260621-4"></script>
   </body>
 </html>

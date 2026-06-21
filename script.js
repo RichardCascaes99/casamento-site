@@ -1,5 +1,11 @@
 const RSVP_DESTINATION_EMAIL = "seu-email@exemplo.com";
 const RSVP_WEBHOOK_URL = "";
+const GIFT_DESTINATION_EMAIL = RSVP_DESTINATION_EMAIL;
+const GIFT_CARD_PAYMENT_URL = "";
+const GIFT_PIX_COPY_TEXT = "Pix copia e cola em breve";
+const GIFT_PIX_QR_IMAGE = "";
+const RSVP_CONFIRMED_STORAGE_KEY = "simone-richard-rsvp-confirmados";
+const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteadores";
 
 const MEMORY_TOTAL = 47;
 const MEMORY_OPTIMIZED_BASE_PATH = "assets/photos-optimized";
@@ -24,6 +30,151 @@ const LEGACY_HASH_ROUTES = {
   "#lista-presentes": "lista-presentes.html",
   "#hospedagem-salao": "hospedagem-salao.html",
 };
+
+const GIFT_PRODUCTS = [
+  { title: "Uma parcela da roda de carbono do Ri", price: "R$ 1.000", initial: "R" },
+  { title: "Capacete aero novo", price: "R$ 1.800", initial: "C" },
+  { title: "Macaquinho estiloso", price: "R$ 800", initial: "M" },
+  { title: "Meia de corrida", price: "R$ 120", initial: "M" },
+  { title: "Boné baixa pace", price: "R$ 150", initial: "B" },
+  { title: "Rolo de treino smart", price: "R$ 3.000", initial: "R" },
+  { title: "Sapatilha nova", price: "R$ 1.000", initial: "S" },
+  { title: "Camisa do Mengão", price: "R$ 300", initial: "M" },
+  { title: "Fone de ouvido novo", price: "R$ 350", initial: "F" },
+  { title: "Cinta cardíaca", price: "R$ 700", initial: "C" },
+  { title: "Eletro Up", price: "R$ 85", initial: "E" },
+  { title: "Um Garmin novo pra ele", price: "R$ 2.000", initial: "G" },
+  { title: "Um Garmin novo pra ela", price: "R$ 2.500", initial: "G" },
+  { title: "Tênis de corrida pro noivo", price: "R$ 1.200", initial: "T" },
+  { title: "Tênis de corrida pra noiva", price: "R$ 1.200", initial: "T" },
+  { title: "Almoço para os noivos endividados", price: "R$ 80", initial: "A" },
+  { title: "Óculos de corrida", price: "R$ 280", initial: "O" },
+  { title: "Caixa de gel da Probi", price: "R$ 100", initial: "G" },
+  { title: "Whey zero lactose", price: "R$ 235", initial: "W" },
+  { title: "Geladeira nova", price: "R$ 2.500", initial: "G" },
+  { title: "Lua de mel em Paris", price: "10x de R$ 1.000", initial: "P" },
+  { title: "2 tainha pro almoço de domingo", price: "R$ 70", initial: "T" },
+  { title: "Spa para noiva descansar", price: "R$ 1.000", initial: "S" },
+];
+
+const INVITED_GUESTS = [
+  "Maria Clara de Faria Fernandes",
+  "Rafael de Castro",
+  "Edgard Henrique Pupo",
+  "Eloisa Lobão",
+  "Thiago Nunes Thiba",
+  "Alberto Borem",
+  "Lucy Helem Borem",
+  "Maria Eduarda Borem",
+  "Pedro Borem",
+  "Simon Lee Shu Huen",
+  "Neli Aparecida Klein",
+  "Lap Lee",
+  "tia Ng",
+  "Camila Lee",
+  "Carl Lee",
+  "tio Henrique",
+  "Henrique Lee",
+  "Isaura de Oliveira",
+  "Thaís Fernanda Magalhães",
+  "Ulisses Lee",
+  "Coralina Cora Lee",
+  "Calvin de Oliveira Lee",
+  "Caroline de Oliveira Lee",
+  "Fernando Hugo",
+  "filho da Caroline",
+  "tia da Alemanha",
+  "tio da Alemanha",
+  "Alda Gorete Klein",
+  "Celine Klein",
+  "Ricardo Cascaes Figueiredo",
+  "Ingrid Cascaes Figueiredo de Jesus Camargo",
+  "Joeferson Jesus Camargo",
+  "Grasiele Silva",
+  "Franken Eluisio da Silva",
+  "Jonilson dos Anjos",
+  "Sandra Regina dos Anjos",
+  "Cláudia Figueiredo",
+  "Ellen da Silva Figueiredo",
+  "Anderson Schmitt",
+  "Ana Paula Figueiredo Rodrigues",
+  "Etori Rodrigues Toco",
+  "Alex Teixeira",
+  "Fernanda Figueiredo",
+  "Leonam da Silva",
+  "Bruna Ferrêira",
+  "Guilherme Cascaes Figueiredo",
+  "Alecyana Batista Teixeira Camargo",
+  "João Paulo Camargo",
+  "Miguel Kawakita",
+  "Shayane zonta",
+  "Cássio Dantas",
+  "Aldo Miike",
+  "Eduardo Martinelli",
+  "Jéssica Souza",
+  "André Andrade",
+  "Filipe Ronzani",
+  "Diurlhane",
+  "Tiago Silva",
+  "Andressa Domingues",
+  "Alessandra Domingues",
+  "Josué Mattos",
+  "Fernanda Mattos",
+  "Edicarlos Cardoso Costa",
+  "Bárbara Rafaela Zen de Andrade",
+  "João Vitor Bastos",
+  "Letícia Medeiros",
+  "Magda Grasiella Lima de Moraes",
+  "Giselle Rodrigues",
+  "Marina Hohne Nunes",
+  "Débora Catarina",
+  "Vitor Hugo",
+  "Anderson Sabadini",
+  "Paulo de Moura",
+  "Dorilda Dolor da Silveira de Moura",
+  "Ricardo Rosa",
+  "Valentina Rosa",
+  "Davi Rosa",
+  "Diego Ferraz",
+  "Gabriela Mieko",
+  "Gabriela Perrenoud",
+  "César Moro",
+  "Maurício Paiva",
+  "Nancy Paiva",
+  "Braian Rizzo",
+  "Mariana Pereira",
+  "Victória Fabris",
+  "Fernando Paladini",
+  "Camila Bragion",
+  "Maia Fleming",
+  "Fernando Lima",
+  "Audrey Marinho",
+  "Gustavo Novais",
+  "Dri Takahashi Adriele",
+  "Jéssica Alegre",
+  "Gabriel Godoy Barbosa",
+  "Rafael Scucuglia",
+  "Tati Scucuglia",
+  "Brenda Rupp Gazze",
+  "Caio Urzelin",
+  "João Campos",
+  "Karin Bike Hauss",
+  "Junior Bike Hauss",
+  "Giselly Westphal Kawakita",
+  "Massaru Kawakita",
+  "Gabriel Vitor Durrewald",
+  "Fernanda Detoni",
+  "Marcos Reinaldo",
+  "Amanda Ingeichak",
+  "Cristiano Hoffman",
+];
+
+const GUEST_INDEX = INVITED_GUESTS.map((name) => ({
+  name,
+  normalized: normalizeText(name),
+  tokens: getMeaningfulTokens(name),
+  key: slugify(name),
+}));
 
 const MEMORY_DATE_LABELS = {
   "001": "26/04/2015",
@@ -96,6 +247,25 @@ const siteFooter = document.querySelector(".site-footer");
 
 const rsvpForm = document.getElementById("rsvp-form");
 const rsvpFeedback = document.getElementById("rsvp-feedback");
+const guestNameInput = document.getElementById("guest-name");
+const guestWhatsappInput = document.getElementById("guest-whatsapp");
+const guestPresenceSelect = document.getElementById("guest-presence");
+const guestMatchFeedback = document.getElementById("guest-match-feedback");
+const matchedGuestNameInput = document.getElementById("matched-guest-name");
+const rsvpSubmitButton = document.getElementById("rsvp-submit");
+const giftShop = document.getElementById("gift-shop");
+const giftModal = document.getElementById("gift-modal");
+const giftModalTitle = document.getElementById("gift-modal-title");
+const giftModalCopy = document.getElementById("gift-modal-copy");
+const giftBuyerNameInput = document.getElementById("gift-buyer-name");
+const giftSaveBuyerButton = document.getElementById("gift-save-buyer");
+const giftPayment = document.getElementById("gift-payment");
+const giftCardPayment = document.getElementById("gift-card-payment");
+const giftQrPlaceholder = document.getElementById("gift-qr-placeholder");
+const giftPixCopyInput = document.getElementById("gift-pix-copy");
+const giftCopyPixButton = document.getElementById("gift-copy-pix");
+const giftFeedback = document.getElementById("gift-feedback");
+const giftCloseButtons = document.querySelectorAll("[data-close-gift-modal]");
 
 const memorySlotsDesktop = [
   { left: 30, top: 15, rotate: -5 },
@@ -137,6 +307,44 @@ function randomBetween(min, max) {
 
 function padNumber(value) {
   return String(value).padStart(3, "0");
+}
+
+function normalizeText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getMeaningfulTokens(value) {
+  const ignoredTokens = new Set(["de", "da", "do", "das", "dos", "e"]);
+  return normalizeText(value)
+    .split(" ")
+    .filter((token) => token.length >= 2 && !ignoredTokens.has(token));
+}
+
+function slugify(value) {
+  return getMeaningfulTokens(value).join("-");
+}
+
+function readStoredList(key) {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(key) || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function writeStoredList(key, value) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.warn("Não foi possível salvar no armazenamento local.", error);
+  }
 }
 
 function shuffle(array) {
@@ -895,7 +1103,7 @@ function updateCountdown() {
 function updateRsvpDeadlineCountdown() {
   if (!rsvpDeadlineCountdownEl) return;
 
-  const deadlineDate = new Date("2026-10-01T23:59:59-03:00");
+  const deadlineDate = new Date("2026-09-25T23:59:59-03:00");
   const now = new Date();
   const diff = deadlineDate.getTime() - now.getTime();
 
@@ -913,6 +1121,129 @@ function updateRsvpDeadlineCountdown() {
   rsvpDeadlineCountdownEl.textContent = `${days} dias • ${hours}h • ${minutes}min`;
 }
 
+function scoreGuestMatch(queryTokens, guest) {
+  let score = 0;
+  queryTokens.forEach((queryToken) => {
+    const matchedToken = guest.tokens.find(
+      (guestToken) =>
+        guestToken === queryToken ||
+        guestToken.startsWith(queryToken) ||
+        queryToken.startsWith(guestToken)
+    );
+    if (matchedToken) {
+      score += matchedToken === queryToken ? 2 : 1;
+    }
+  });
+  return score;
+}
+
+function findGuestMatch(value) {
+  const normalizedValue = normalizeText(value);
+  const queryTokens = getMeaningfulTokens(value);
+
+  if (normalizedValue.length < 3 || queryTokens.length === 0) {
+    return { status: "empty" };
+  }
+
+  const directMatches = GUEST_INDEX.filter(
+    (guest) =>
+      guest.normalized === normalizedValue ||
+      (normalizedValue.length >= 5 && guest.normalized.includes(normalizedValue)) ||
+      (normalizedValue.length >= 8 && normalizedValue.includes(guest.normalized))
+  );
+
+  if (directMatches.length === 1) {
+    return { status: "matched", guest: directMatches[0] };
+  }
+
+  const scoredMatches = GUEST_INDEX.map((guest) => ({
+    guest,
+    score: scoreGuestMatch(queryTokens, guest),
+  }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  if (scoredMatches.length === 0) {
+    return { status: "not-found" };
+  }
+
+  const bestScore = scoredMatches[0].score;
+  const bestMatches = scoredMatches.filter(({ score }) => score === bestScore);
+  const requiredScore = queryTokens.length === 1 ? 2 : 3;
+
+  if (bestScore < requiredScore) {
+    return { status: "not-found" };
+  }
+
+  if (bestMatches.length > 1) {
+    return { status: "ambiguous", matches: bestMatches.map(({ guest }) => guest) };
+  }
+
+  return { status: "matched", guest: bestMatches[0].guest };
+}
+
+function getConfirmedGuestKeys() {
+  return readStoredList(RSVP_CONFIRMED_STORAGE_KEY);
+}
+
+function markGuestAsConfirmed(guestKey) {
+  const confirmed = getConfirmedGuestKeys();
+  if (!confirmed.includes(guestKey)) {
+    confirmed.push(guestKey);
+    writeStoredList(RSVP_CONFIRMED_STORAGE_KEY, confirmed);
+  }
+}
+
+function isGuestAlreadyConfirmed(guestKey) {
+  return getConfirmedGuestKeys().includes(guestKey);
+}
+
+function setRsvpControlsEnabled(isEnabled) {
+  if (guestPresenceSelect) guestPresenceSelect.disabled = !isEnabled;
+  if (rsvpSubmitButton) rsvpSubmitButton.disabled = !isEnabled;
+}
+
+function updateGuestMatchState() {
+  if (!guestNameInput || !guestMatchFeedback || !matchedGuestNameInput) return null;
+
+  const match = findGuestMatch(guestNameInput.value);
+  guestMatchFeedback.className = "field-hint";
+  matchedGuestNameInput.value = "";
+  setRsvpControlsEnabled(false);
+
+  if (match.status === "empty") {
+    guestMatchFeedback.textContent = "Digite seu nome para buscarmos na lista de convidados.";
+    return match;
+  }
+
+  if (match.status === "not-found") {
+    guestMatchFeedback.textContent =
+      "Não encontramos esse nome na lista. Confira se digitou nome ou sobrenome corretamente.";
+    guestMatchFeedback.classList.add("error");
+    return match;
+  }
+
+  if (match.status === "ambiguous") {
+    const names = match.matches.slice(0, 3).map((guest) => guest.name).join(", ");
+    guestMatchFeedback.textContent = `Encontramos mais de uma possibilidade (${names}). Digite também o sobrenome.`;
+    guestMatchFeedback.classList.add("error");
+    return match;
+  }
+
+  if (isGuestAlreadyConfirmed(match.guest.key)) {
+    guestMatchFeedback.textContent =
+      `${match.guest.name} já possui confirmação registrada neste dispositivo.`;
+    guestMatchFeedback.classList.add("error");
+    return { ...match, status: "duplicate" };
+  }
+
+  matchedGuestNameInput.value = match.guest.name;
+  guestMatchFeedback.textContent = `Convidado encontrado: ${match.guest.name}. Agora você pode confirmar.`;
+  guestMatchFeedback.classList.add("success");
+  setRsvpControlsEnabled(true);
+  return match;
+}
+
 async function submitToWebhook(entry) {
   if (!RSVP_WEBHOOK_URL) return;
   await fetch(RSVP_WEBHOOK_URL, {
@@ -922,10 +1253,12 @@ async function submitToWebhook(entry) {
   });
 }
 
+function hasConfiguredEmail(email) {
+  return Boolean(email && email.includes("@") && !email.includes("@exemplo.com"));
+}
+
 async function sendRsvpEmail(entry) {
-  const hasDestination =
-    RSVP_DESTINATION_EMAIL && RSVP_DESTINATION_EMAIL.includes("@");
-  if (!hasDestination) {
+  if (!hasConfiguredEmail(RSVP_DESTINATION_EMAIL)) {
     throw new Error("Destino de e-mail do RSVP não configurado.");
   }
 
@@ -936,6 +1269,8 @@ async function sendRsvpEmail(entry) {
   const payload = {
     _subject: `RSVP Casamento - ${entry.guestName}`,
     nome: entry.guestName,
+    convidado_reconhecido: entry.matchedGuestName,
+    whatsapp: entry.whatsapp,
     presenca: entry.presence === "sim" ? "Sim" : "Não",
     recado: entry.message || "Sem recado",
     data_envio: entry.createdAt,
@@ -958,15 +1293,28 @@ async function sendRsvpEmail(entry) {
 function initRsvpForm() {
   if (!rsvpForm || !rsvpFeedback) return;
 
+  setRsvpControlsEnabled(false);
+  guestNameInput?.addEventListener("input", updateGuestMatchState);
+
   rsvpForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const match = updateGuestMatchState();
     const formData = new FormData(rsvpForm);
     const guestName = String(formData.get("guestName") || "").trim();
+    const matchedGuestName = String(formData.get("matchedGuestName") || "").trim();
+    const whatsapp = String(formData.get("whatsapp") || "").trim();
     const presence = String(formData.get("presence") || "").trim();
     const message = String(formData.get("message") || "").trim();
 
-    if (!guestName || !presence) {
-      rsvpFeedback.textContent = "Preencha nome e presença para continuar.";
+    if (!match || match.status !== "matched" || !matchedGuestName) {
+      rsvpFeedback.textContent =
+        "Digite um nome que esteja na lista de convidados antes de confirmar.";
+      rsvpFeedback.className = "feedback error";
+      return;
+    }
+
+    if (!guestName || !whatsapp || !presence) {
+      rsvpFeedback.textContent = "Preencha nome, WhatsApp e presença para continuar.";
       rsvpFeedback.className = "feedback error";
       return;
     }
@@ -974,6 +1322,9 @@ function initRsvpForm() {
     const entry = {
       id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
       guestName,
+      matchedGuestName,
+      guestKey: match.guest.key,
+      whatsapp,
       presence,
       message,
       createdAt: new Date().toISOString(),
@@ -982,16 +1333,222 @@ function initRsvpForm() {
     try {
       await sendRsvpEmail(entry);
       await submitToWebhook(entry);
+      markGuestAsConfirmed(entry.guestKey);
       rsvpForm.reset();
+      updateGuestMatchState();
       rsvpFeedback.textContent =
         "Confirmação enviada com sucesso. Obrigado por responder.";
       rsvpFeedback.className = "feedback success";
     } catch (error) {
       rsvpFeedback.textContent =
-        "Não foi possível enviar por e-mail agora. Revise o e-mail de destino no script.";
+        "Não foi possível enviar por e-mail agora. Precisamos configurar o e-mail real dos noivos no site.";
       rsvpFeedback.className = "feedback error";
       console.error(error);
     }
+  });
+}
+
+function getStoredGiftBuyers() {
+  return readStoredList(GIFT_BUYER_STORAGE_KEY);
+}
+
+function saveGiftBuyer(productId, buyerName) {
+  const buyers = getStoredGiftBuyers().filter((entry) => entry.productId !== productId);
+  buyers.push({ productId, buyerName });
+  writeStoredList(GIFT_BUYER_STORAGE_KEY, buyers);
+}
+
+function getGiftBuyer(productId) {
+  return getStoredGiftBuyers().find((entry) => entry.productId === productId);
+}
+
+function buildGiftProductId(product) {
+  return slugify(product.title);
+}
+
+function renderGiftProducts() {
+  if (!giftShop) return;
+
+  giftShop.innerHTML = GIFT_PRODUCTS.map((product, index) => {
+    const productId = buildGiftProductId(product);
+    const buyer = getGiftBuyer(productId);
+    const buttonLabel = buyer ? "Comprar" : "Ver Presente";
+    const mediaContent = product.image
+      ? `<img src="${product.image}" alt="${product.title}" loading="lazy" />`
+      : `<span>${product.initial}</span>`;
+    return `
+      <article class="gift-product-card reveal" style="transition-delay: ${Math.min(index * 0.025, 0.24)}s">
+        <div class="gift-product-media">${mediaContent}</div>
+        <h3>${product.title}</h3>
+        <p class="gift-price">${product.price}</p>
+        <button class="btn btn-primary" type="button" data-gift-action data-product-id="${productId}">${buttonLabel}</button>
+      </article>
+    `;
+  }).join("");
+
+  initReveals();
+}
+
+function getGiftProductById(productId) {
+  return GIFT_PRODUCTS.find((product) => buildGiftProductId(product) === productId);
+}
+
+function setGiftFeedback(message, type = "") {
+  if (!giftFeedback) return;
+  giftFeedback.textContent = message;
+  giftFeedback.className = type ? `feedback ${type}` : "feedback";
+}
+
+function openGiftModal(productId, shouldShowPayment = false) {
+  if (!giftModal || !giftModalTitle || !giftBuyerNameInput || !giftPayment) return;
+
+  const product = getGiftProductById(productId);
+  if (!product) return;
+
+  const buyer = getGiftBuyer(productId);
+  giftModal.dataset.productId = productId;
+  giftModalTitle.textContent = product.title;
+  giftModalCopy.textContent = buyer
+    ? `${buyer.buyerName}, escolha abaixo como deseja seguir com esse presente.`
+    : "Preencha seu nome para liberarmos as opções de pagamento desse presente.";
+  giftBuyerNameInput.value = buyer?.buyerName || "";
+  giftBuyerNameInput.disabled = Boolean(buyer);
+  giftSaveBuyerButton.hidden = Boolean(buyer);
+  giftPayment.hidden = !(buyer || shouldShowPayment);
+  giftCardPayment.href = GIFT_CARD_PAYMENT_URL || "#";
+  giftCardPayment.classList.toggle("is-disabled", !GIFT_CARD_PAYMENT_URL);
+  giftCardPayment.textContent = GIFT_CARD_PAYMENT_URL
+    ? "Pagar com cartão"
+    : "Link de cartão em breve";
+  giftPixCopyInput.value = GIFT_PIX_COPY_TEXT;
+  giftQrPlaceholder.innerHTML = GIFT_PIX_QR_IMAGE
+    ? `<img src="${GIFT_PIX_QR_IMAGE}" alt="QR Code Pix" />`
+    : "<span>QR Code Pix em breve</span>";
+  setGiftFeedback("");
+  giftModal.classList.add("is-open");
+  giftModal.setAttribute("aria-hidden", "false");
+
+  if (!buyer) {
+    window.setTimeout(() => giftBuyerNameInput.focus(), 80);
+  }
+}
+
+function closeGiftModal() {
+  if (!giftModal) return;
+  giftModal.classList.remove("is-open");
+  giftModal.setAttribute("aria-hidden", "true");
+}
+
+async function sendGiftEmail(entry) {
+  if (!hasConfiguredEmail(GIFT_DESTINATION_EMAIL)) {
+    throw new Error("Destino de e-mail dos presentes não configurado.");
+  }
+
+  const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(
+    GIFT_DESTINATION_EMAIL
+  )}`;
+
+  const payload = {
+    _subject: `Presente escolhido - ${entry.productTitle}`,
+    nome: entry.buyerName,
+    presente: entry.productTitle,
+    valor: entry.productPrice,
+    data_envio: entry.createdAt,
+  };
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error("Falha ao enviar presente por e-mail.");
+  }
+}
+
+async function handleGiftPurchase(productId) {
+  const product = getGiftProductById(productId);
+  const buyer = getGiftBuyer(productId);
+  if (!product || !buyer) return;
+
+  openGiftModal(productId, true);
+
+  const entry = {
+    productId,
+    productTitle: product.title,
+    productPrice: product.price,
+    buyerName: buyer.buyerName,
+    createdAt: new Date().toISOString(),
+  };
+
+  try {
+    await sendGiftEmail(entry);
+    setGiftFeedback("Abrimos as opções de pagamento e avisamos os noivos sobre sua escolha.", "success");
+  } catch (error) {
+    setGiftFeedback(
+      "As opções de pagamento estão abertas, mas ainda falta configurar o e-mail real dos noivos.",
+      "error"
+    );
+    console.error(error);
+  }
+}
+
+function initGiftShop() {
+  if (!giftShop || !giftModal) return;
+
+  renderGiftProducts();
+
+  giftShop.addEventListener("click", (event) => {
+    const actionButton = event.target.closest("[data-gift-action]");
+    if (!actionButton) return;
+
+    const productId = actionButton.dataset.productId;
+    const buyer = getGiftBuyer(productId);
+    if (buyer) {
+      handleGiftPurchase(productId);
+      return;
+    }
+    openGiftModal(productId);
+  });
+
+  giftSaveBuyerButton?.addEventListener("click", () => {
+    const productId = giftModal.dataset.productId;
+    const buyerName = giftBuyerNameInput.value.trim();
+    if (!productId || !buyerName) {
+      setGiftFeedback("Digite seu nome para continuar.", "error");
+      return;
+    }
+
+    saveGiftBuyer(productId, buyerName);
+    renderGiftProducts();
+    openGiftModal(productId, true);
+    setGiftFeedback("Nome registrado. Agora é só escolher cartão ou Pix.", "success");
+  });
+
+  giftCopyPixButton?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(giftPixCopyInput.value);
+      setGiftFeedback("Pix copia e cola copiado.", "success");
+    } catch (error) {
+      giftPixCopyInput.select();
+      setGiftFeedback("Selecione e copie o Pix manualmente.", "error");
+    }
+  });
+
+  giftCloseButtons.forEach((button) => {
+    button.addEventListener("click", closeGiftModal);
+  });
+
+  giftModal.addEventListener("click", (event) => {
+    if (event.target === giftModal) closeGiftModal();
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeGiftModal();
   });
 }
 
@@ -1006,6 +1563,7 @@ initReveals();
 initMenu();
 initSectionTabs();
 initRsvpForm();
+initGiftShop();
 updateCountdown();
 updateRsvpDeadlineCountdown();
 window.setInterval(updateCountdown, 60 * 1000);
