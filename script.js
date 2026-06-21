@@ -873,7 +873,7 @@ function initSectionTabs() {
 
 function updateCountdown() {
   if (!countdownEl) return;
-  const weddingDate = new Date("2026-10-31T14:15:00-03:00");
+  const weddingDate = new Date("2026-10-31T14:00:00-03:00");
   const now = new Date();
   const diff = weddingDate.getTime() - now.getTime();
 
