@@ -1,6 +1,6 @@
 const RSVP_DESTINATION_EMAIL = "seu-email@exemplo.com";
 const RSVP_WEBHOOK_URL = "";
-const GIFT_DESTINATION_EMAIL = RSVP_DESTINATION_EMAIL;
+const GIFT_DESTINATION_EMAIL = "seu-email@exemplo.com";
 const GIFT_CARD_PAYMENT_URL = "";
 const GIFT_PIX_COPY_TEXT = "Pix copia e cola em breve";
 const GIFT_PIX_QR_IMAGE = "";
@@ -1255,7 +1255,12 @@ async function submitToWebhook(entry) {
 }
 
 function hasConfiguredEmail(email) {
-  return Boolean(email && email.includes("@") && !email.includes("@exemplo.com"));
+  return Boolean(
+    email &&
+      email.includes("@") &&
+      !email.includes("@exemplo.com") &&
+      !email.includes("seu-email")
+  );
 }
 
 async function sendRsvpEmail(entry) {
@@ -1484,8 +1489,10 @@ async function sendGiftEmail(entry) {
 
   const payload = {
     _subject: `Presente escolhido - ${entry.productTitle}`,
+    _template: "table",
+    _captcha: "false",
     nome: entry.buyerName,
-    presente: entry.productTitle,
+    item_clicado: entry.productTitle,
     valor: entry.productPrice,
     data_envio: entry.createdAt,
   };
@@ -1529,7 +1536,7 @@ async function handleGiftPurchase(productId) {
     setGiftFeedback("Abrimos as opções de pagamento e avisamos os noivos sobre sua escolha.", "success");
   } catch (error) {
     setGiftFeedback(
-      "As opções de pagamento estão abertas, mas ainda falta configurar o e-mail real dos noivos.",
+      "As opções de pagamento estão abertas. Falta configurar o e-mail real dos noivos para receber o aviso automático.",
       "error"
     );
     console.error(error);
