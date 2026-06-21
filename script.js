@@ -78,6 +78,7 @@ const MEMORY_DATE_LABELS = {
 const heroMonogram = document.getElementById("hero-monogram");
 const heroCollage = document.getElementById("hero-collage");
 const countdownEl = document.getElementById("countdown");
+const rsvpDeadlineCountdownEl = document.getElementById("rsvp-deadline-countdown");
 
 const memoriesContainer = document.querySelector(".memories");
 const memoryCards = Array.from(document.querySelectorAll(".memory-card"));
@@ -891,6 +892,27 @@ function updateCountdown() {
   countdownEl.textContent = `${days} dias • ${hours}h • ${minutes}min`;
 }
 
+function updateRsvpDeadlineCountdown() {
+  if (!rsvpDeadlineCountdownEl) return;
+
+  const deadlineDate = new Date("2026-10-01T23:59:59-03:00");
+  const now = new Date();
+  const diff = deadlineDate.getTime() - now.getTime();
+
+  if (diff <= 0) {
+    rsvpDeadlineCountdownEl.textContent = "prazo encerrado";
+    return;
+  }
+
+  const dayMs = 1000 * 60 * 60 * 24;
+  const hourMs = 1000 * 60 * 60;
+  const minuteMs = 1000 * 60;
+  const days = Math.floor(diff / dayMs);
+  const hours = Math.floor((diff % dayMs) / hourMs);
+  const minutes = Math.floor((diff % hourMs) / minuteMs);
+  rsvpDeadlineCountdownEl.textContent = `${days} dias • ${hours}h • ${minutes}min`;
+}
+
 async function submitToWebhook(entry) {
   if (!RSVP_WEBHOOK_URL) return;
   await fetch(RSVP_WEBHOOK_URL, {
@@ -985,4 +1007,6 @@ initMenu();
 initSectionTabs();
 initRsvpForm();
 updateCountdown();
+updateRsvpDeadlineCountdown();
 window.setInterval(updateCountdown, 60 * 1000);
+window.setInterval(updateRsvpDeadlineCountdown, 60 * 1000);
