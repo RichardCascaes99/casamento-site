@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260621-1" />
+    <link rel="stylesheet" href="styles.css?v=20260621-2" />
   </head>
   <body>
     <header class="topbar">
@@ -44,13 +44,13 @@
         </button>
       </div>
       <nav class="side-nav">
-        <a href="#nossa-historia" data-tab-link>Nossa história</a>
-        <a href="#endereco" data-tab-link>Endereço</a>
-        <a href="#cronograma-casamento" data-tab-link>Cronograma do casamento</a>
-        <a href="#confirmar-presenca" data-tab-link>Confirmar presença</a>
-        <a href="#dress-code" data-tab-link>Dress Code</a>
-        <a href="#lista-presentes" data-tab-link>Lista de presentes</a>
-        <a href="#hospedagem-salao" data-tab-link>Hospedagem e salão</a>
+        <a href="nossa-historia.html">Nossa história</a>
+        <a href="endereco.html">Endereço</a>
+        <a href="cronograma-casamento.html">Cronograma do casamento</a>
+        <a href="confirmar-presenca.html">Confirmar presença</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="lista-presentes.html">Lista de presentes</a>
+        <a href="hospedagem-salao.html">Hospedagem e salão</a>
       </nav>
     </aside>
 
@@ -134,169 +134,12 @@
         </div>
       </section>
 
-      <section id="endereco" class="section tab-section" hidden>
-        <p class="eyebrow">Endereço</p>
-        <h2>Mirante Gold Party (Biguaçu-SC)</h2>
-        <p class="intro">
-          A cerimônia e a recepção serão no mesmo local. Temos estacionamento no
-          espaço para facilitar sua chegada.
-        </p>
-        <ul class="details-list">
-          <li>Data: 31.10.26</li>
-          <li>Local: Mirante Gold Party, Biguaçu-SC</li>
-          <li>Cerimônia e recepção no mesmo endereço</li>
-          <li>Estacionamento disponível</li>
-        </ul>
-        <a
-          class="btn btn-outline"
-          href="https://www.google.com/maps/search/?api=1&query=Mirante+Gold+Party+Bigua%C3%A7u+SC"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Abrir rota no Google Maps
-        </a>
-      </section>
-
-      <section id="cronograma-casamento" class="section tab-section" hidden>
-        <p class="eyebrow">Cronograma do casamento</p>
-        <h2>Programação do dia</h2>
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <span class="timeline-time">14h15</span>
-            <div>
-              <h3>Início da cerimônia</h3>
-              <p>Pedimos pontualidade para todos aproveitarem esse momento.</p>
-            </div>
-          </article>
-          <article class="timeline-item reveal">
-            <span class="timeline-time">15h30</span>
-            <div>
-              <h3>Café da tarde e fotos</h3>
-              <p>Momento leve para fotos, abraços e boas conversas.</p>
-            </div>
-          </article>
-          <article class="timeline-item reveal">
-            <span class="timeline-time">18h00</span>
-            <div>
-              <h3>Jantar</h3>
-              <p>Encerramos a noite com um jantar especial para celebrar juntos.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="confirmar-presenca" class="section rsvp tab-section" hidden>
-        <p class="eyebrow">Confirmar presença</p>
-        <h2>RSVP</h2>
-        <p class="intro">Confirme sua presença preenchendo o formulário abaixo.</p>
-        <form id="rsvp-form" class="rsvp-form">
-          <label for="guest-name">Nome completo *</label>
-          <input id="guest-name" name="guestName" type="text" required />
-
-          <label for="guest-presence">Presença *</label>
-          <select id="guest-presence" name="presence" required>
-            <option value="">Selecione</option>
-            <option value="sim">Sim, vou comemorar com vocês!</option>
-            <option value="nao">Não poderei comparecer</option>
-          </select>
-
-          <label for="guest-message">Recado para os noivos (opcional)</label>
-          <textarea
-            id="guest-message"
-            name="message"
-            rows="3"
-            placeholder="Escreva um recadinho..."
-          ></textarea>
-
-          <button type="submit" class="btn btn-primary">Enviar confirmação</button>
-          <p class="rsvp-note">
-            Sua confirmação é enviada automaticamente por e-mail para os noivos.
-          </p>
-          <p id="rsvp-feedback" class="feedback" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section id="dress-code" class="section tab-section" hidden>
-        <p class="eyebrow">Dress Code</p>
-        <h2>Conforto, estilo e personalidade.</h2>
-        <p class="intro">
-          Os tons de rosa e azul são reservados para padrinhos e madrinhas.
-          Demais convidados, por favor, evitem esses tons.
-        </p>
-        <p class="intro">
-          Nosso casamento é diferente do comum, então está liberado usar roupas
-          confortáveis.
-        </p>
-        <div class="color-rules">
-          <article class="color-chip avoid-rose reveal">
-            <span>Evitar</span>
-            <strong>Tons de rosa</strong>
-          </article>
-          <article class="color-chip avoid-blue reveal delay-1">
-            <span>Evitar</span>
-            <strong>Tons de azul</strong>
-          </article>
-        </div>
-      </section>
-
-      <section id="lista-presentes" class="section gifts tab-section" hidden>
-        <p class="eyebrow">Lista de presentes</p>
-        <h2>Com carinho, em forma de presente</h2>
-        <p class="intro">
-          Em vez de presentes físicos, vocês podem nos presentear via Pix. A
-          lista abaixo representa sonhos que queremos construir juntos.
-        </p>
-        <div class="gift-layout">
-          <div class="gift-list reveal">
-            <h3>Nosso mural de desejos</h3>
-            <ul>
-              <li>Lua de mel</li>
-              <li>Jantar especial do casal</li>
-              <li>Itens para o novo lar</li>
-              <li>Experiências para nossa nova fase</li>
-            </ul>
-          </div>
-          <div class="pix-card reveal delay-1">
-            <h3>Pix do casal</h3>
-            <p>Escaneie o QR Code para enviar o valor que desejar.</p>
-            <div class="qr-placeholder" aria-label="Área do QR Code Pix">
-              <span>Insira aqui o QR Code Pix</span>
-            </div>
-            <p class="pix-key">Chave Pix: adicionar_chave@exemplo.com</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="hospedagem-salao" class="section suggestions tab-section" hidden>
-        <p class="eyebrow">Hospedagem e salão</p>
-        <h2>Sugestões próximas ao local</h2>
-        <div class="suggestion-grid">
-          <article class="suggestion-card reveal">
-            <h3>Hotéis e pousadas</h3>
-            <p>Espaço para incluir opções próximas ao Mirante Gold Party.</p>
-            <ul>
-              <li>Adicionar nome do hotel</li>
-              <li>Endereço e distância aproximada</li>
-              <li>Contato para reserva</li>
-            </ul>
-          </article>
-          <article class="suggestion-card reveal delay-1">
-            <h3>Salão / maquiagem / penteado</h3>
-            <p>Espaço para indicar profissionais e salões recomendados.</p>
-            <ul>
-              <li>Nome do salão</li>
-              <li>Serviços disponíveis</li>
-              <li>Telefone ou Instagram</li>
-            </ul>
-          </article>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
       <p>Com amor, esperando vocês para esse dia inesquecível.</p>
     </footer>
 
-    <script src="script.js?v=20260621-1"></script>
+    <script src="script.js?v=20260621-2"></script>
   </body>
 </html>

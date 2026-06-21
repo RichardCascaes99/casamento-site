@@ -15,6 +15,15 @@ const HERO_COLLAGE_MIN_DESKTOP = MEMORY_TOTAL;
 const HERO_COLLAGE_MAX = 72;
 const HERO_COLLAGE_MAX_HEAVY_OVERLAPS = 2;
 const HERO_COLLAGE_HEAVY_OVERLAP_RATIO = 0.8;
+const LEGACY_HASH_ROUTES = {
+  "#nossa-historia": "nossa-historia.html",
+  "#endereco": "endereco.html",
+  "#cronograma-casamento": "cronograma-casamento.html",
+  "#confirmar-presenca": "confirmar-presenca.html",
+  "#dress-code": "dress-code.html",
+  "#lista-presentes": "lista-presentes.html",
+  "#hospedagem-salao": "hospedagem-salao.html",
+};
 
 const MEMORY_DATE_LABELS = {
   "001": "26/04/2015",
@@ -140,6 +149,17 @@ function shuffle(array) {
 
 function isDesktopMemories() {
   return !window.matchMedia("(max-width: 920px)").matches;
+}
+
+function redirectLegacyHashRoute() {
+  const route = LEGACY_HASH_ROUTES[window.location.hash];
+  if (!route) return;
+
+  const pathname = window.location.pathname;
+  const isHomePage = pathname.endsWith("/") || pathname.endsWith("/index.html");
+  if (isHomePage) {
+    window.location.replace(route);
+  }
 }
 
 function getHeroCollagePhotoCount(width, height) {
@@ -957,6 +977,7 @@ window.addEventListener("beforeunload", () => {
   clearMemoryCycle();
 });
 
+redirectLegacyHashRoute();
 initHeroCollage();
 initHeroScroll();
 initReveals();

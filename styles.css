@@ -75,6 +75,11 @@ main {
   overflow: clip;
 }
 
+.detail-main {
+  min-height: 100vh;
+  padding-top: 4rem;
+}
+
 .topbar {
   position: fixed;
   top: 0;
@@ -131,6 +136,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #444;
+  text-decoration: none;
 }
 
 .topbar-spacer {
@@ -356,6 +362,10 @@ body.menu-open .menu-overlay {
   padding: var(--section-spacing) 0;
   border-top: 1px solid #f0f0f0;
   scroll-margin-top: 5rem;
+}
+
+.detail-section {
+  border-top: 0;
 }
 
 .tab-section[hidden] {
