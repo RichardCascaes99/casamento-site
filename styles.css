@@ -362,7 +362,7 @@ body.menu-open .menu-overlay {
   display: none;
 }
 
-.tab-section.is-active {
+.section.is-active {
   animation: tabSectionEnter 0.42s ease both;
 }
 
@@ -396,13 +396,37 @@ body.menu-open .menu-overlay {
   display: block;
 }
 
+.story-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 320px);
+  gap: clamp(1.6rem, 4vw, 3.4rem);
+  align-items: start;
+}
+
 .story-text {
-  max-width: 760px;
-  margin: 0 auto;
+  max-width: 720px;
 }
 
 .story-text p {
   color: var(--text-soft);
+}
+
+.proposal-video {
+  width: min(100%, 320px);
+  margin: 0;
+  justify-self: center;
+  position: sticky;
+  top: 5.4rem;
+}
+
+.proposal-video video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  background: #111;
+  box-shadow: 0 22px 42px rgba(23, 23, 23, 0.16);
 }
 
 .memories {
@@ -735,10 +759,15 @@ body.menu-open .menu-overlay {
     margin-top: min(56vh, 30rem);
   }
 
-  .story,
+  .story-layout,
   .gifts .gift-layout,
   .suggestion-grid {
     grid-template-columns: 1fr;
+  }
+
+  .proposal-video {
+    width: min(100%, 300px);
+    position: static;
   }
 
   .memories {

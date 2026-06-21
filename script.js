@@ -79,8 +79,10 @@ const menuClose = document.getElementById("menu-close");
 const menuOverlay = document.getElementById("menu-overlay");
 const sideMenu = document.getElementById("site-menu");
 const sideMenuLinks = document.querySelectorAll(".side-nav a");
+const homeSections = Array.from(document.querySelectorAll("#inicio, #nossa-historia"));
 const tabSections = Array.from(document.querySelectorAll(".tab-section"));
 const tabSectionLinks = Array.from(document.querySelectorAll("[data-tab-link]"));
+const siteFooter = document.querySelector(".site-footer");
 
 const rsvpForm = document.getElementById("rsvp-form");
 const rsvpFeedback = document.getElementById("rsvp-feedback");
@@ -738,32 +740,60 @@ function initMenu() {
   });
 }
 
-function hideTabSections() {
-  tabSections.forEach((section) => {
-    section.hidden = true;
-    section.classList.remove("is-active");
-  });
-  tabSectionLinks.forEach((link) => link.removeAttribute("aria-current"));
-}
-
-function showTabSection(sectionId, shouldScroll = true) {
-  const target = document.getElementById(sectionId);
-  if (!target || !target.classList.contains("tab-section")) return false;
-
-  tabSections.forEach((section) => {
-    const isTarget = section === target;
-    section.hidden = !isTarget;
-    section.classList.toggle("is-active", isTarget);
-  });
-
+function setActiveMenuLink(sectionId = "") {
   tabSectionLinks.forEach((link) => {
-    const isCurrent = link.getAttribute("href") === `#${sectionId}`;
+    const isCurrent = sectionId && link.getAttribute("href") === `#${sectionId}`;
     if (isCurrent) {
       link.setAttribute("aria-current", "page");
     } else {
       link.removeAttribute("aria-current");
     }
   });
+}
+
+function hideTabSections() {
+  tabSections.forEach((section) => {
+    section.hidden = true;
+    section.classList.remove("is-active");
+  });
+  setActiveMenuLink();
+}
+
+function showHomeView(shouldScroll = true) {
+  homeSections.forEach((section) => {
+    section.hidden = false;
+    section.classList.remove("is-active");
+  });
+  tabSections.forEach((section) => {
+    section.hidden = true;
+    section.classList.remove("is-active");
+  });
+  siteFooter?.removeAttribute("hidden");
+  setActiveMenuLink();
+
+  if (shouldScroll) {
+    document.getElementById("inicio")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function showExclusiveSection(sectionId, shouldScroll = true) {
+  const target = document.getElementById(sectionId);
+  const isStory = sectionId === "nossa-historia";
+  const isTabSection = target?.classList.contains("tab-section");
+  if (!target || (!isStory && !isTabSection)) return false;
+
+  document.getElementById("inicio")?.setAttribute("hidden", "");
+  document.getElementById("nossa-historia").hidden = !isStory;
+
+  tabSections.forEach((section) => {
+    const isTarget = isTabSection && section === target;
+    section.hidden = !isTarget;
+    section.classList.toggle("is-active", isTarget);
+  });
+
+  target.classList.toggle("is-active", true);
+  siteFooter?.setAttribute("hidden", "");
+  setActiveMenuLink(sectionId);
 
   if (shouldScroll) {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -781,35 +811,42 @@ function initSectionTabs() {
       if (!href.startsWith("#")) return;
 
       const sectionId = href.slice(1);
-      const openedTab = showTabSection(sectionId, true);
-      if (openedTab) {
+      const openedExclusiveSection = showExclusiveSection(sectionId, true);
+      if (openedExclusiveSection) {
         event.preventDefault();
         window.history.pushState(null, "", href);
         return;
       }
 
-      hideTabSections();
+      showHomeView(true);
     });
   });
 
   const initialSectionId = window.location.hash.slice(1);
   if (initialSectionId) {
-    const openedInitialTab = showTabSection(initialSectionId, false);
-    if (openedInitialTab) {
+    const openedInitialSection = showExclusiveSection(initialSectionId, false);
+    if (openedInitialSection) {
       window.requestAnimationFrame(() => {
         document
           .getElementById(initialSectionId)
           ?.scrollIntoView({ behavior: "auto", block: "start" });
       });
+    } else {
+      showHomeView(false);
     }
   } else {
-    hideTabSections();
+    showHomeView(false);
   }
 
   window.addEventListener("hashchange", () => {
     const sectionId = window.location.hash.slice(1);
-    if (!showTabSection(sectionId, true)) {
-      hideTabSections();
+    if (!sectionId) {
+      showHomeView(true);
+      return;
+    }
+
+    if (!showExclusiveSection(sectionId, true)) {
+      showHomeView(true);
     }
   });
 }
