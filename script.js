@@ -1,6 +1,6 @@
-const RSVP_DESTINATION_EMAIL = "seu-email@exemplo.com";
+const RSVP_DESTINATION_EMAIL = "rjuniorcf@gmail.com";
 const RSVP_WEBHOOK_URL = "";
-const GIFT_DESTINATION_EMAIL = "seu-email@exemplo.com";
+const GIFT_DESTINATION_EMAIL = "rjuniorcf@gmail.com";
 const GIFT_CARD_PAYMENT_URL = "";
 const GIFT_PIX_COPY_TEXT = "Pix copia e cola em breve";
 const GIFT_PIX_QR_IMAGE = "";
