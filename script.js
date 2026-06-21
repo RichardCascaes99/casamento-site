@@ -2,8 +2,8 @@ const RSVP_DESTINATION_EMAIL = "rjuniorcf@gmail.com";
 const RSVP_WEBHOOK_URL = "";
 const GIFT_DESTINATION_EMAIL = "rjuniorcf@gmail.com";
 const GIFT_CARD_PAYMENT_URL = "";
-const GIFT_PIX_COPY_TEXT = "Pix copia e cola em breve";
-const GIFT_PIX_QR_IMAGE = "";
+const GIFT_PIX_COPY_TEXT = "00020126580014BR.GOV.BCB.PIX0136f35427de-e68d-48c0-a6b7-1401e4a813d15204000053039865802BR5925Richard Cascaes Figueired6009SAO PAULO62140510zQPRQgHNb563046546";
+const GIFT_PIX_QR_IMAGE = "assets/images/pix-noivo.jpg";
 const RSVP_CONFIRMED_STORAGE_KEY = "simone-richard-rsvp-confirmados";
 const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteador";
 
