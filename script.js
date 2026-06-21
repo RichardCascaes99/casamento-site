@@ -5,7 +5,7 @@ const GIFT_CARD_PAYMENT_URL = "";
 const GIFT_PIX_COPY_TEXT = "Pix copia e cola em breve";
 const GIFT_PIX_QR_IMAGE = "";
 const RSVP_CONFIRMED_STORAGE_KEY = "simone-richard-rsvp-confirmados";
-const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteadores";
+const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteador";
 
 const MEMORY_TOTAL = 47;
 const MEMORY_OPTIMIZED_BASE_PATH = "assets/photos-optimized";
@@ -67,13 +67,13 @@ const INVITED_GUESTS = [
   "Lucy Helem Borem",
   "Maria Eduarda Borem",
   "Pedro Borem",
-  "Simon Lee Shu Huen",
+  "Simon - Lee Shu Hung",
   "Neli Aparecida Klein",
   "Lap Lee",
   "tia Ng",
   "Camila Lee",
   "Carl Lee",
-  "tio Henrique",
+  "Henri Lee",
   "Henrique Lee",
   "Isaura de Oliveira",
   "Thaís Fernanda Magalhães",
@@ -82,12 +82,13 @@ const INVITED_GUESTS = [
   "Calvin de Oliveira Lee",
   "Caroline de Oliveira Lee",
   "Fernando Hugo",
-  "filho da Caroline",
-  "tia da Alemanha",
-  "tio da Alemanha",
+  "Theo Lee Mendonça",
+  "Nam Phat Quach",
+  "Miewa Quach Lee",
   "Alda Gorete Klein",
   "Celine Klein",
   "Ricardo Cascaes Figueiredo",
+  "Richard Cascaes Figueiredo",
   "Ingrid Cascaes Figueiredo de Jesus Camargo",
   "Joeferson Jesus Camargo",
   "Grasiele Silva",
@@ -1348,22 +1349,29 @@ function initRsvpForm() {
   });
 }
 
-function getStoredGiftBuyers() {
-  return readStoredList(GIFT_BUYER_STORAGE_KEY);
-}
-
-function saveGiftBuyer(productId, buyerName) {
-  const buyers = getStoredGiftBuyers().filter((entry) => entry.productId !== productId);
-  buyers.push({ productId, buyerName });
-  writeStoredList(GIFT_BUYER_STORAGE_KEY, buyers);
-}
-
-function getGiftBuyer(productId) {
-  return getStoredGiftBuyers().find((entry) => entry.productId === productId);
-}
-
 function buildGiftProductId(product) {
   return slugify(product.title);
+}
+
+function getGiftBuyerName() {
+  try {
+    return window.localStorage.getItem(GIFT_BUYER_STORAGE_KEY) || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function saveGiftBuyerName(buyerName) {
+  try {
+    window.localStorage.setItem(GIFT_BUYER_STORAGE_KEY, buyerName);
+  } catch (error) {
+    console.warn("Não foi possível salvar o nome do presenteador.", error);
+  }
+}
+
+function showGiftShop() {
+  if (!giftShop) return;
+  giftShop.hidden = false;
 }
 
 function renderGiftProducts() {
@@ -1371,8 +1379,6 @@ function renderGiftProducts() {
 
   giftShop.innerHTML = GIFT_PRODUCTS.map((product, index) => {
     const productId = buildGiftProductId(product);
-    const buyer = getGiftBuyer(productId);
-    const buttonLabel = buyer ? "Comprar" : "Ver Presente";
     const mediaContent = product.image
       ? `<img src="${product.image}" alt="${product.title}" loading="lazy" />`
       : `<span>${product.initial}</span>`;
@@ -1381,7 +1387,7 @@ function renderGiftProducts() {
         <div class="gift-product-media">${mediaContent}</div>
         <h3>${product.title}</h3>
         <p class="gift-price">${product.price}</p>
-        <button class="btn btn-primary" type="button" data-gift-action data-product-id="${productId}">${buttonLabel}</button>
+        <button class="btn btn-primary" type="button" data-gift-action data-product-id="${productId}">Comprar</button>
       </article>
     `;
   }).join("");
@@ -1399,22 +1405,9 @@ function setGiftFeedback(message, type = "") {
   giftFeedback.className = type ? `feedback ${type}` : "feedback";
 }
 
-function openGiftModal(productId, shouldShowPayment = false) {
-  if (!giftModal || !giftModalTitle || !giftBuyerNameInput || !giftPayment) return;
+function setGiftPaymentDetails() {
+  if (!giftCardPayment || !giftPixCopyInput || !giftQrPlaceholder) return;
 
-  const product = getGiftProductById(productId);
-  if (!product) return;
-
-  const buyer = getGiftBuyer(productId);
-  giftModal.dataset.productId = productId;
-  giftModalTitle.textContent = product.title;
-  giftModalCopy.textContent = buyer
-    ? `${buyer.buyerName}, escolha abaixo como deseja seguir com esse presente.`
-    : "Preencha seu nome para liberarmos as opções de pagamento desse presente.";
-  giftBuyerNameInput.value = buyer?.buyerName || "";
-  giftBuyerNameInput.disabled = Boolean(buyer);
-  giftSaveBuyerButton.hidden = Boolean(buyer);
-  giftPayment.hidden = !(buyer || shouldShowPayment);
   giftCardPayment.href = GIFT_CARD_PAYMENT_URL || "#";
   giftCardPayment.classList.toggle("is-disabled", !GIFT_CARD_PAYMENT_URL);
   giftCardPayment.textContent = GIFT_CARD_PAYMENT_URL
@@ -1424,17 +1417,58 @@ function openGiftModal(productId, shouldShowPayment = false) {
   giftQrPlaceholder.innerHTML = GIFT_PIX_QR_IMAGE
     ? `<img src="${GIFT_PIX_QR_IMAGE}" alt="QR Code Pix" />`
     : "<span>QR Code Pix em breve</span>";
+}
+
+function openGiftIdentityModal() {
+  if (!giftModal || !giftModalTitle || !giftBuyerNameInput || !giftPayment) return;
+
+  giftModal.dataset.mode = "identity";
+  delete giftModal.dataset.productId;
+  giftModalTitle.textContent = "Antes de ver a lista";
+  giftModalCopy.textContent =
+    "Digite seu nome uma única vez para liberar a nossa lista de presentes.";
+  giftBuyerNameInput.value = getGiftBuyerName();
+  giftBuyerNameInput.disabled = false;
+  giftBuyerNameInput.hidden = false;
+  giftSaveBuyerButton.hidden = false;
+  giftPayment.hidden = true;
+  giftCloseButtons.forEach((button) => {
+    button.hidden = !getGiftBuyerName();
+  });
   setGiftFeedback("");
   giftModal.classList.add("is-open");
   giftModal.setAttribute("aria-hidden", "false");
+  window.setTimeout(() => giftBuyerNameInput.focus(), 80);
+}
 
-  if (!buyer) {
-    window.setTimeout(() => giftBuyerNameInput.focus(), 80);
-  }
+function openGiftModal(productId) {
+  if (!giftModal || !giftModalTitle || !giftBuyerNameInput || !giftPayment) return;
+
+  const product = getGiftProductById(productId);
+  if (!product) return;
+
+  const buyerName = getGiftBuyerName();
+  giftModal.dataset.productId = productId;
+  giftModal.dataset.mode = "payment";
+  giftModalTitle.textContent = product.title;
+  giftModalCopy.textContent = `${buyerName}, escolha abaixo como deseja seguir com esse presente.`;
+  giftBuyerNameInput.value = buyerName;
+  giftBuyerNameInput.hidden = true;
+  giftBuyerNameInput.disabled = true;
+  giftSaveBuyerButton.hidden = true;
+  giftPayment.hidden = false;
+  giftCloseButtons.forEach((button) => {
+    button.hidden = false;
+  });
+  setGiftPaymentDetails();
+  setGiftFeedback("");
+  giftModal.classList.add("is-open");
+  giftModal.setAttribute("aria-hidden", "false");
 }
 
 function closeGiftModal() {
   if (!giftModal) return;
+  if (giftModal.dataset.mode === "identity" && !getGiftBuyerName()) return;
   giftModal.classList.remove("is-open");
   giftModal.setAttribute("aria-hidden", "true");
 }
@@ -1472,16 +1506,21 @@ async function sendGiftEmail(entry) {
 
 async function handleGiftPurchase(productId) {
   const product = getGiftProductById(productId);
-  const buyer = getGiftBuyer(productId);
-  if (!product || !buyer) return;
+  const buyerName = getGiftBuyerName();
+  if (!product) return;
 
-  openGiftModal(productId, true);
+  if (!buyerName) {
+    openGiftIdentityModal();
+    return;
+  }
+
+  openGiftModal(productId);
 
   const entry = {
     productId,
     productTitle: product.title,
     productPrice: product.price,
-    buyerName: buyer.buyerName,
+    buyerName,
     createdAt: new Date().toISOString(),
   };
 
@@ -1501,32 +1540,31 @@ function initGiftShop() {
   if (!giftShop || !giftModal) return;
 
   renderGiftProducts();
+  if (getGiftBuyerName()) {
+    showGiftShop();
+  } else {
+    openGiftIdentityModal();
+  }
 
   giftShop.addEventListener("click", (event) => {
     const actionButton = event.target.closest("[data-gift-action]");
     if (!actionButton) return;
 
     const productId = actionButton.dataset.productId;
-    const buyer = getGiftBuyer(productId);
-    if (buyer) {
-      handleGiftPurchase(productId);
-      return;
-    }
-    openGiftModal(productId);
+    handleGiftPurchase(productId);
   });
 
   giftSaveBuyerButton?.addEventListener("click", () => {
-    const productId = giftModal.dataset.productId;
     const buyerName = giftBuyerNameInput.value.trim();
-    if (!productId || !buyerName) {
+    if (!buyerName) {
       setGiftFeedback("Digite seu nome para continuar.", "error");
       return;
     }
 
-    saveGiftBuyer(productId, buyerName);
+    saveGiftBuyerName(buyerName);
+    showGiftShop();
     renderGiftProducts();
-    openGiftModal(productId, true);
-    setGiftFeedback("Nome registrado. Agora é só escolher cartão ou Pix.", "success");
+    closeGiftModal();
   });
 
   giftCopyPixButton?.addEventListener("click", async () => {

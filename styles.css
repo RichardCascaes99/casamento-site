@@ -767,6 +767,10 @@ body.menu-open .menu-overlay {
   margin-top: 1.7rem;
 }
 
+.gift-shop[hidden] {
+  display: none;
+}
+
 .gift-product-card,
 .suggestion-card {
   border: 1px solid #ebebeb;
