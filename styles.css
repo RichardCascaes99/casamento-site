@@ -610,6 +610,22 @@ body.menu-open .menu-overlay {
   box-shadow: var(--shadow-soft);
 }
 
+.map-card {
+  margin-top: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(232, 232, 232, 0.9);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.map-card iframe {
+  display: block;
+  width: 100%;
+  min-height: 310px;
+  border: 0;
+}
+
 .timeline {
   margin-top: 1.1rem;
   border-left: 1px solid #e5e5e5;
@@ -649,6 +665,11 @@ body.menu-open .menu-overlay {
 
 .rsvp-content {
   min-width: 0;
+}
+
+.rsvp-side {
+  display: grid;
+  gap: 1rem;
 }
 
 .rsvp-form {
@@ -1006,6 +1027,32 @@ body.menu-open .menu-overlay {
   margin-top: 1.2rem;
 }
 
+.detail-visual-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+  gap: clamp(1.3rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.detail-side-photo {
+  margin: 0;
+  position: sticky;
+  top: 5.4rem;
+}
+
+.detail-side-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow-soft);
+}
+
+.rsvp-photo {
+  position: static;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1089,6 +1136,7 @@ body.menu-open .menu-overlay {
 
   .story-layout,
   .address-layout,
+  .detail-visual-layout,
   .rsvp-layout,
   .suggestion-grid,
   .home-links-grid {
@@ -1097,6 +1145,7 @@ body.menu-open .menu-overlay {
 
   .proposal-video,
   .address-photo,
+  .detail-side-photo,
   .rsvp-deadline {
     width: min(100%, 300px);
     position: static;
@@ -1107,7 +1156,13 @@ body.menu-open .menu-overlay {
     max-width: 520px;
   }
 
-  .address-photo img {
+  .detail-side-photo {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .address-photo img,
+  .detail-side-photo img {
     aspect-ratio: 4 / 3;
   }
 

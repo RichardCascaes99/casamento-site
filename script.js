@@ -1234,7 +1234,7 @@ function updateGuestMatchState() {
 
   if (isGuestAlreadyConfirmed(match.guest.key)) {
     guestMatchFeedback.textContent =
-      `${match.guest.name} já possui confirmação registrada neste dispositivo.`;
+      `${match.guest.name} já possui confirmação registrada.`;
     guestMatchFeedback.classList.add("error");
     return { ...match, status: "duplicate" };
   }
