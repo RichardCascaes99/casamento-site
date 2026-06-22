@@ -60,6 +60,7 @@ const GIFT_PRODUCTS = [
 const INVITED_GUESTS = [
   "Maria Clara de Faria Fernandes",
   "Rafael de Castro",
+  "Janaína Belchior",
   "Edgard Henrique Pupo",
   "Eloisa Lobão",
   "Thiago Nunes Thiba",
