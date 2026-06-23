@@ -1,6 +1,7 @@
 const RSVP_DESTINATION_EMAIL = "rjuniorcf@gmail.com";
 const RSVP_WEBHOOK_URL = "";
 const GIFT_DESTINATION_EMAIL = "rjuniorcf@gmail.com";
+const SECONDARY_DESTINATION_EMAIL = "simone.lee501@gmail.com";
 const GIFT_CARD_PAYMENT_URL = "";
 const GIFT_PIX_COPY_TEXT = "00020126580014BR.GOV.BCB.PIX0136f35427de-e68d-48c0-a6b7-1401e4a813d15204000053039865802BR5925Richard Cascaes Figueired6009SAO PAULO62140510zQPRQgHNb563046546";
 const GIFT_PIX_QR_IMAGE = "assets/images/pix-noivo.jpg";
@@ -1275,6 +1276,7 @@ async function sendRsvpEmail(entry) {
 
   const payload = {
     _subject: `RSVP Casamento - ${entry.guestName}`,
+    _cc: SECONDARY_DESTINATION_EMAIL,
     nome: entry.guestName,
     convidado_reconhecido: entry.matchedGuestName,
     whatsapp: entry.whatsapp,
@@ -1490,6 +1492,7 @@ async function sendGiftEmail(entry) {
 
   const payload = {
     _subject: `Presente escolhido - ${entry.productTitle}`,
+    _cc: SECONDARY_DESTINATION_EMAIL,
     _template: "table",
     _captcha: "false",
     nome: entry.buyerName,
