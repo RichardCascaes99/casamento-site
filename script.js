@@ -156,6 +156,8 @@ const INVITED_GUESTS = [
   "Dri Takahashi Adriele",
   "Jéssica Alegre",
   "Gabriel Godoy Barbosa",
+  "Gabriel Morais",
+  "Kassy Anne",
   "Rafael Scucuglia",
   "Tati Scucuglia",
   "Brenda Rupp Gazze",
