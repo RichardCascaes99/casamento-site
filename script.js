@@ -143,7 +143,7 @@ const INVITED_GUESTS = [
   "Gabriela Perrenoud",
   "César Moro",
   "Maurício Paiva",
-  "Nancy Paiva",
+  "Nancy Ferreira",
   "Braian Rizzo",
   "Mariana Pereira",
   "Victória Fabris",
