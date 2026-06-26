@@ -158,6 +158,8 @@ const INVITED_GUESTS = [
   "Gabriel Godoy Barbosa",
   "Gabriel Morais",
   "Kassy Anne",
+  "Joaquina Lealcina de Jesus",
+  "Valdeci de Souza - Seu Ci",
   "Rafael Scucuglia",
   "Tati Scucuglia",
   "Brenda Rupp Gazze",
