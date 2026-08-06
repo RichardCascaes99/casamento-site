@@ -8,9 +8,9 @@ const GIFT_PIX_QR_IMAGE = "assets/images/pix-noivo.jpg";
 const RSVP_CONFIRMED_STORAGE_KEY = "simone-richard-rsvp-confirmados";
 const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteador";
 
-const MEMORY_TOTAL = 50;
+const MEMORY_TOTAL = 52;
 const MEMORY_OPTIMIZED_BASE_PATH = "assets/photos-optimized";
-const HERO_FEATURED_MEMORY_IDS = ["048", "049", "050"];
+const HERO_FEATURED_MEMORY_IDS = ["048", "049", "050", "051", "052"];
 const HERO_SLIDE_DURATION_MS = 8000;
 const MEMORY_PRELOAD_COUNT = 14;
 const MEMORY_IMAGE_SWAP_MS = 2200;
@@ -236,6 +236,8 @@ const MEMORY_DATE_LABELS = {
   "048": "04/08/2026",
   "049": "04/08/2026",
   "050": "04/08/2026",
+  "051": "04/08/2026",
+  "052": "04/08/2026",
 };
 
 const heroMonogram = document.getElementById("hero-monogram");
