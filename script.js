@@ -618,16 +618,26 @@ function animateHeroMonogram() {
 
 function initHeroScroll() {
   animateHeroMonogram();
+  updateHomeTopbarTheme();
   let ticking = false;
   window.addEventListener("scroll", () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         animateHeroMonogram();
+        updateHomeTopbarTheme();
         ticking = false;
       });
       ticking = true;
     }
   });
+}
+
+function updateHomeTopbarTheme() {
+  if (!document.body.classList.contains("home-page")) return;
+  const hero = document.getElementById("inicio");
+  if (!hero) return;
+  const shouldUseLightTopbar = window.scrollY < hero.offsetHeight - 96;
+  document.body.classList.toggle("is-over-hero", shouldUseLightTopbar);
 }
 
 function initReveals() {

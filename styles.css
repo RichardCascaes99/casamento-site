@@ -144,6 +144,22 @@ body.menu-open .menu-toggle span:nth-child(3) {
   height: 44px;
 }
 
+.home-page.is-over-hero .topbar {
+  background: transparent;
+  border-bottom: 0;
+  backdrop-filter: none;
+}
+
+.home-page.is-over-hero .menu-toggle span {
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.home-page.is-over-hero .topbar-date {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.42);
+}
+
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -246,7 +262,7 @@ body.menu-open .menu-overlay {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: #f4f0ec;
+  background: #111;
 }
 
 .hero-slide {
@@ -264,9 +280,8 @@ body.menu-open .menu-overlay {
 .hero-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  filter: saturate(0.96) contrast(0.96);
 }
 
 .hero-photo {
@@ -330,6 +345,7 @@ body.menu-open .menu-overlay {
   transition: transform 0.2s linear, opacity 0.2s linear;
   opacity: 0.96;
   z-index: 3;
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.42));
 }
 
 .hero-copy {
@@ -344,6 +360,8 @@ body.menu-open .menu-overlay {
   font-size: clamp(2rem, 5.8vw, 4.1rem);
   letter-spacing: 0.02em;
   font-weight: 500;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.48);
 }
 
 .hero-time {
@@ -351,7 +369,8 @@ body.menu-open .menu-overlay {
   font-size: clamp(0.9rem, 1.9vw, 1.05rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #525252;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.48);
 }
 
 .hero-eyebrow {
@@ -366,7 +385,8 @@ body.menu-open .menu-overlay {
   margin: 0;
   font-size: clamp(0.9rem, 2vw, 1.05rem);
   letter-spacing: 0.05em;
-  color: var(--text-soft);
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.48);
 }
 
 .hero-countdown {
@@ -374,13 +394,14 @@ body.menu-open .menu-overlay {
   bottom: 1.4rem;
   margin: 0;
   font-size: 0.84rem;
-  color: #5d5d5d;
+  color: rgba(255, 255, 255, 0.9);
   letter-spacing: 0.05em;
   z-index: 4;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
 .hero-countdown span {
-  color: #161616;
+  color: #fff;
   font-weight: 600;
 }
 
