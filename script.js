@@ -11,6 +11,7 @@ const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteador";
 const MEMORY_TOTAL = 50;
 const MEMORY_OPTIMIZED_BASE_PATH = "assets/photos-optimized";
 const HERO_FEATURED_MEMORY_IDS = ["048", "049", "050"];
+const HERO_SLIDE_DURATION_MS = 8000;
 const MEMORY_PRELOAD_COUNT = 14;
 const MEMORY_IMAGE_SWAP_MS = 2200;
 const MEMORY_FADE_OUT_MS = 560;
@@ -239,6 +240,7 @@ const MEMORY_DATE_LABELS = {
 
 const heroMonogram = document.getElementById("hero-monogram");
 const heroCollage = document.getElementById("hero-collage");
+const heroSlideshow = document.getElementById("hero-slideshow");
 const countdownEl = document.getElementById("countdown");
 const rsvpDeadlineCountdownEl = document.getElementById("rsvp-deadline-countdown");
 
@@ -567,6 +569,43 @@ function initHeroCollage() {
   });
 }
 
+function initHeroSlideshow() {
+  if (!heroSlideshow) return;
+
+  const slides = HERO_FEATURED_MEMORY_IDS.map((id) => ({
+    id,
+    src: `${MEMORY_OPTIMIZED_BASE_PATH}/memoria-${id}.jpg`,
+    label: MEMORY_DATE_LABELS[id] || "Foto do casal",
+  }));
+
+  const fragment = document.createDocumentFragment();
+  slides.forEach((slide, index) => {
+    const figure = document.createElement("figure");
+    figure.className = `hero-slide${index === 0 ? " is-active" : ""}`;
+    figure.setAttribute("aria-hidden", "true");
+
+    const img = document.createElement("img");
+    img.src = slide.src;
+    img.alt = "";
+    img.decoding = "async";
+    img.loading = index === 0 ? "eager" : "lazy";
+    figure.appendChild(img);
+    fragment.appendChild(figure);
+  });
+
+  heroSlideshow.replaceChildren(fragment);
+
+  if (slides.length <= 1 || memoryPrefersReducedMotion.matches) return;
+
+  let activeIndex = 0;
+  const renderedSlides = Array.from(heroSlideshow.querySelectorAll(".hero-slide"));
+  window.setInterval(() => {
+    renderedSlides[activeIndex]?.classList.remove("is-active");
+    activeIndex = (activeIndex + 1) % renderedSlides.length;
+    renderedSlides[activeIndex]?.classList.add("is-active");
+  }, HERO_SLIDE_DURATION_MS);
+}
+
 function animateHeroMonogram() {
   if (!heroMonogram) return;
   const maxScroll = window.innerHeight * 0.9;
@@ -665,7 +704,8 @@ async function resolveMemorySource(item) {
 }
 
 function refillMemoryQueue() {
-  memoryQueue = shuffle(buildMemoryPool());
+  const featuredIds = new Set(HERO_FEATURED_MEMORY_IDS);
+  memoryQueue = shuffle(buildMemoryPool().filter((item) => !featuredIds.has(item.id)));
 }
 
 function warmUpMemoryQueue(count = MEMORY_PRELOAD_COUNT) {
@@ -1619,11 +1659,13 @@ window.addEventListener("beforeunload", () => {
 });
 
 redirectLegacyHashRoute();
+initHeroSlideshow();
 initHeroCollage();
 initHeroScroll();
 initReveals();
 initMenu();
 initSectionTabs();
+initRandomMemories();
 initRsvpForm();
 initGiftShop();
 updateCountdown();
