@@ -8,8 +8,9 @@ const GIFT_PIX_QR_IMAGE = "assets/images/pix-noivo.jpg";
 const RSVP_CONFIRMED_STORAGE_KEY = "simone-richard-rsvp-confirmados";
 const GIFT_BUYER_STORAGE_KEY = "simone-richard-presenteador";
 
-const MEMORY_TOTAL = 47;
+const MEMORY_TOTAL = 50;
 const MEMORY_OPTIMIZED_BASE_PATH = "assets/photos-optimized";
+const HERO_FEATURED_MEMORY_IDS = ["048", "049", "050"];
 const MEMORY_PRELOAD_COUNT = 14;
 const MEMORY_IMAGE_SWAP_MS = 2200;
 const MEMORY_FADE_OUT_MS = 560;
@@ -231,6 +232,9 @@ const MEMORY_DATE_LABELS = {
   "045": "23/04/2025",
   "046": "22/02/2026",
   "047": "25/05/2024",
+  "048": "04/08/2026",
+  "049": "04/08/2026",
+  "050": "04/08/2026",
 };
 
 const heroMonogram = document.getElementById("hero-monogram");
@@ -399,13 +403,18 @@ function overlapArea(rectA, rectB) {
 }
 
 function buildHeroCollageSequence(count) {
-  const selected = [];
-  let batch = shuffle(buildMemoryPool());
+  const memoryPool = buildMemoryPool();
+  const featuredIds = new Set(HERO_FEATURED_MEMORY_IDS);
+  const featuredPhotos = HERO_FEATURED_MEMORY_IDS.map((id) =>
+    memoryPool.find((photo) => photo.id === id)
+  ).filter(Boolean);
+  const selected = featuredPhotos.slice(0, count);
+  let batch = shuffle(memoryPool.filter((photo) => !featuredIds.has(photo.id)));
   let cursor = 0;
 
   while (selected.length < count) {
     if (cursor >= batch.length) {
-      batch = shuffle(buildMemoryPool());
+      batch = shuffle(memoryPool);
       cursor = 0;
     }
     selected.push(batch[cursor]);
