@@ -563,6 +563,28 @@ body.menu-open .menu-overlay {
   margin: 1.8rem 0;
 }
 
+.suggestion-group {
+  margin-top: clamp(2.2rem, 5vw, 3.8rem);
+}
+
+.suggestion-group > .eyebrow {
+  margin-bottom: 0.7rem;
+}
+
+.lodging-grid,
+.beauty-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.map-suggestion-card .map-card {
+  margin-top: 1rem;
+}
+
+.map-suggestion-card iframe {
+  min-height: 280px;
+}
+
 .suggestion-card span {
   display: inline-block;
   margin-bottom: 0.55rem;
@@ -640,6 +662,10 @@ body.menu-open .menu-overlay {
   gap: 1rem;
   align-items: start;
   margin-top: 1rem;
+}
+
+.salon-images {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .hotel-map-card {

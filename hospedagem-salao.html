@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260820-5" />
+    <link rel="stylesheet" href="styles.css?v=20260820-6" />
   </head>
   <body>
     <header class="topbar"><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="site-menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="topbar-date" href="index.html">31.10.26</a><span class="topbar-spacer" aria-hidden="true"></span></header>
@@ -19,79 +19,80 @@
         <p class="eyebrow">Hospedagem e salão</p>
         <h1>Sugestões para se organizar com calma</h1>
         <p class="intro">Separamos indicações para facilitar a estadia e a produção de quem vem celebrar esse dia com a gente.</p>
-        <div class="suggestions-grid">
-          <article class="suggestion-card">
-            <span>Hotel recomendado</span>
-            <h2>Aéra Hotel São José Floripa</h2>
-            <p>Av. Presidente Kennedy, 167, Barreiros, São José-SC</p>
-            <a class="button-link" href="https://maps.app.goo.gl/CDZ7LQKU2SyofwrL6?g_st=iw" target="_blank" rel="noopener">Abrir endereço no Google Maps</a>
-          </article>
-          <article class="suggestion-card">
-            <span>Maquiagem e penteado</span>
-            <h2>Taize Kruschinski Makeup</h2>
-            <p>Produção para convidadas, com atendimento em estúdio ou em domicílio mediante consulta.</p>
-            <ul class="suggestion-list">
-              <li>Penteados: R$ 150 até R$ 200</li>
-              <li>Babyliss: a partir de R$ 100</li>
-              <li>Maquiagem: R$ 220</li>
-              <li>Em domicílio, antes das 8h, domingos e feriados: penteado R$ 250 e maquiagem R$ 250</li>
-            </ul>
-            <div class="button-row">
-              <a class="button-link" href="https://www.instagram.com/taizekruschinskimakeup?igsh=MTE5M2dzZ29qcWU5eg==" target="_blank" rel="noopener">Falar pelo Instagram</a>
-              <a class="button-link button-link-ghost" href="https://maps.google.com/?q=Rua%20Jo%C3%A3o%20Grumich%C3%A9%2C%201712%2C%20Ro%C3%A7ado%2C%20S%C3%A3o%20Jos%C3%A9%2C%20SC%2C%2088108-100" target="_blank" rel="noopener">Ver endereço</a>
-            </div>
-          </article>
-          <article class="suggestion-card">
-            <span>Maquiagem e beleza</span>
-            <h2>Francine Felisberto Beauty</h2>
-            <p>Mais uma indicação para quem quiser agendar maquiagem, penteado ou escova com babyliss para o casamento.</p>
-            <ul class="suggestion-list">
-              <li>No estúdio: maquiagem R$ 170, penteado R$ 180 e escova com babyliss a partir de R$ 100</li>
-              <li>Em domicílio: maquiagem R$ 200, penteado R$ 200 e escova com babyliss a partir de R$ 120</li>
-              <li>Para atendimento em domicílio, consultar taxa de deslocamento informando o local</li>
-              <li>Endereço do estúdio: Rua São Pedro, 985, Areias, São José-SC</li>
-              <li>Reserva de horário com sinal de R$ 50 por maquiagem, abatido do valor total</li>
-            </ul>
-            <div class="button-row">
-              <a class="button-link" href="https://www.instagram.com/francinefelisbertobeauty/" target="_blank" rel="noopener">Falar pelo Instagram</a>
-              <a class="button-link button-link-ghost" href="https://maps.google.com/?q=Rua%20S%C3%A3o%20Pedro%2C%20985%2C%20Areias%2C%20S%C3%A3o%20Jos%C3%A9%2C%20SC" target="_blank" rel="noopener">Ver endereço</a>
-            </div>
-          </article>
-        </div>
-        <div class="hotel-map-card">
-          <div>
-            <p class="eyebrow">Pesquisar hotéis</p>
-            <h2>Hotéis na região de Biguaçu-SC</h2>
-            <p>Use o mapa abaixo para comparar outras opções de hospedagem próximas à região do casamento.</p>
-            <a class="button-link button-link-ghost" href="https://www.google.com/maps/search/Hotel+Bigua%C3%A7u+Santa+Catarina" target="_blank" rel="noopener">Abrir pesquisa no Google Maps</a>
+        <section class="suggestion-group">
+          <p class="eyebrow">Hospedagens</p>
+          <div class="suggestions-grid lodging-grid">
+            <article class="suggestion-card">
+              <span>Hotel recomendado</span>
+              <h2>Aéra Hotel São José Floripa</h2>
+              <p>Av. Presidente Kennedy, 167, Barreiros, São José-SC</p>
+              <a class="button-link" href="https://maps.app.goo.gl/CDZ7LQKU2SyofwrL6?g_st=iw" target="_blank" rel="noopener">Abrir endereço no Google Maps</a>
+            </article>
+            <article class="suggestion-card map-suggestion-card">
+              <span>Pesquisar hotéis</span>
+              <h2>Hotéis na região de Biguaçu-SC</h2>
+              <p>Use o mapa para comparar outras opções de hospedagem próximas à região do casamento.</p>
+              <a class="button-link button-link-ghost" href="https://www.google.com/maps/search/Hotel+Bigua%C3%A7u+Santa+Catarina" target="_blank" rel="noopener">Abrir pesquisa no Google Maps</a>
+              <div class="map-card">
+                <iframe
+                  title="Pesquisa de hotéis em Biguaçu-SC"
+                  src="https://www.google.com/maps?q=Hotel%20Bigua%C3%A7u%20Santa%20Catarina&output=embed"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </article>
           </div>
-          <div class="map-card">
-            <iframe
-              title="Pesquisa de hotéis em Biguaçu-SC"
-              src="https://www.google.com/maps?q=Hotel%20Bigua%C3%A7u%20Santa%20Catarina&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
+        </section>
+        <section class="suggestion-group">
+          <p class="eyebrow">Salão e maquiagem</p>
+          <div class="suggestions-grid beauty-grid">
+            <article class="suggestion-card">
+              <span>Maquiagem e penteado</span>
+              <h2>Taize Kruschinski Makeup</h2>
+              <p>Produção para convidadas, com atendimento em estúdio ou em domicílio mediante consulta.</p>
+              <ul class="suggestion-list">
+                <li>Penteados: R$ 150 até R$ 200</li>
+                <li>Babyliss: a partir de R$ 100</li>
+                <li>Maquiagem: R$ 220</li>
+                <li>Em domicílio, antes das 8h, domingos e feriados: penteado R$ 250 e maquiagem R$ 250</li>
+                <li>Endereço da Taize: Life Business Residence, R. João Grumiché, 1712, Roçado, São José-SC, sala 112, 1º andar</li>
+                <li>Torre 2: discar no interfone nº 112</li>
+              </ul>
+              <div class="button-row">
+                <a class="button-link" href="https://www.instagram.com/taizekruschinskimakeup?igsh=MTE5M2dzZ29qcWU5eg==" target="_blank" rel="noopener">Falar pelo Instagram</a>
+                <a class="button-link button-link-ghost" href="https://maps.google.com/?q=Rua%20Jo%C3%A3o%20Grumich%C3%A9%2C%201712%2C%20Ro%C3%A7ado%2C%20S%C3%A3o%20Jos%C3%A9%2C%20SC%2C%2088108-100" target="_blank" rel="noopener">Ver endereço</a>
+              </div>
+            </article>
+            <article class="suggestion-card">
+              <span>Maquiagem e beleza</span>
+              <h2>Francine Felisberto Beauty</h2>
+              <p>Mais uma indicação para quem quiser agendar maquiagem, penteado ou escova com babyliss para o casamento.</p>
+              <ul class="suggestion-list">
+                <li>No estúdio: maquiagem R$ 170, penteado R$ 180 e escova com babyliss a partir de R$ 100</li>
+                <li>Em domicílio: maquiagem R$ 200, penteado R$ 200 e escova com babyliss a partir de R$ 120</li>
+                <li>Para atendimento em domicílio, consultar taxa de deslocamento informando o local</li>
+                <li>Endereço do estúdio: Rua São Pedro, 985, Areias, São José-SC</li>
+                <li>Reserva de horário com sinal de R$ 50 por maquiagem, abatido do valor total</li>
+              </ul>
+              <div class="button-row">
+                <a class="button-link" href="https://www.instagram.com/francinefelisbertobeauty/" target="_blank" rel="noopener">Falar pelo Instagram</a>
+                <a class="button-link button-link-ghost" href="https://maps.google.com/?q=Rua%20S%C3%A3o%20Pedro%2C%20985%2C%20Areias%2C%20S%C3%A3o%20Jos%C3%A9%2C%20SC" target="_blank" rel="noopener">Ver endereço</a>
+              </div>
+            </article>
           </div>
-        </div>
-        <div class="salon-info">
-          <div>
-            <p class="eyebrow">Endereço da Taize</p>
-            <h2>Life Business Residence</h2>
-            <p>R. João Grumiché, 1712, Roçado, São José-SC, 88108-100</p>
-            <p>Torre 2, sala 112, 1º andar. Discar no interfone nº 112.</p>
-            <p>O prédio possui vagas gratuitas na frente das torres e estacionamento rotativo pago. Após as 18h e aos sábados, o estacionamento é gratuito.</p>
+          <div class="salon-info salon-images">
+            <figure>
+              <img src="assets/images/taize-orcamento.jpg" alt="Orçamento de maquiagem e penteado da Taize Kruschinski Makeup" />
+            </figure>
+            <figure>
+              <img src="assets/images/taize-endereco.jpg" alt="Informações de endereço e acesso ao Life Business Residence" />
+            </figure>
           </div>
-          <figure>
-            <img src="assets/images/taize-orcamento.jpg" alt="Orçamento de maquiagem e penteado da Taize Kruschinski Makeup" />
-          </figure>
-          <figure>
-            <img src="assets/images/taize-endereco.jpg" alt="Informações de endereço e acesso ao Life Business Residence" />
-          </figure>
-        </div>
+        </section>
       </section>
     </main>
-    <script src="script.js?v=20260820-5"></script>
+    <script src="script.js?v=20260820-6"></script>
   </body>
 </html>
