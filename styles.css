@@ -642,6 +642,41 @@ body.menu-open .menu-overlay {
   margin-top: 1rem;
 }
 
+.hotel-map-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin: 1rem 0;
+}
+
+.hotel-map-card > div:first-child {
+  padding: clamp(1.2rem, 2.6vw, 1.8rem);
+  border: 1px solid rgba(181, 138, 69, 0.22);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 16px 34px rgba(23, 23, 23, 0.05);
+}
+
+.hotel-map-card h2 {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+}
+
+.hotel-map-card p:not(.eyebrow) {
+  margin: 0 0 1.2rem;
+  color: var(--text-soft);
+}
+
+.hotel-map-card .map-card {
+  margin-top: 0;
+  min-height: 100%;
+}
+
+.hotel-map-card iframe {
+  min-height: 360px;
+}
+
 .salon-info > div,
 .salon-info figure {
   margin: 0;
@@ -1319,6 +1354,7 @@ body.menu-open .menu-overlay {
   .rsvp-layout,
   .suggestion-grid,
   .suggestions-grid,
+  .hotel-map-card,
   .salon-info,
   .home-links-grid {
     grid-template-columns: 1fr;
