@@ -548,6 +548,59 @@ body.menu-open .menu-overlay {
   font-weight: 600;
 }
 
+.suggestion-card {
+  margin: 1.8rem 0;
+  padding: clamp(1.3rem, 3vw, 2rem);
+  border: 1px solid rgba(181, 138, 69, 0.28);
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: var(--shadow-soft);
+}
+
+.suggestion-card span {
+  display: inline-block;
+  margin-bottom: 0.55rem;
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.suggestion-card h2 {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+.suggestion-card p {
+  margin: 0 0 1.25rem;
+  color: var(--text-soft);
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.85rem 1.2rem;
+  border: 1px solid #171717;
+  border-radius: 999px;
+  background: #171717;
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible {
+  transform: translateY(-2px);
+  background: transparent;
+  color: #171717;
+}
+
 .memories-section {
   overflow: hidden;
 }
